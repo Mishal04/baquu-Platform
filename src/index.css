@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-canvas: #F4F7FB;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --border-subtle: #CBD5E1;
+    --accent-gold: #F59E0B;
+    --accent-navy: #0B1B3D;
+    --accent-emerald: #059669;
+    --accent-sky: #0284C7;
+  }
+
+  body {
+    background-color: #F4F7FB;
+    color: #0F172A;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Vibrant Grid & Dots Background Patterns */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(11, 27, 61, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 27, 61, 0.05) 1px, transparent 1px);
+}
+
+.bg-dots-pattern {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(11, 27, 61, 0.1) 1px, transparent 1px);
+}
+
+.bg-dark-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+}
+
