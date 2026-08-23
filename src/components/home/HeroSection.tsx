@@ -18,7 +18,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Background Image with Dark Luxury Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=2000&q=85"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1280px-Flame_towers_from_Baku_boulevard.JPG"
           alt="Baku Azerbaijan Skyline - Flame Towers & Caspian Sea"
           className="w-full h-full object-cover object-center transform scale-105 animate-in fade-in duration-1000"
         />
@@ -125,7 +125,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               <div className="relative h-44 rounded-xl overflow-hidden group">
                 <img
-                  src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Baku_Montage.jpg/1280px-Baku_Montage.jpg"
                   alt="Azerbaijan Tour Preview"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />

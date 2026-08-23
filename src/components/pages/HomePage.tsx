@@ -5,6 +5,7 @@ import { HeroServiceCards } from '../home/HeroServiceCards';
 import { PopularToursSection } from '../home/PopularToursSection';
 import { WhyChooseSection } from '../home/WhyChooseSection';
 import { DestinationsGrid } from '../home/DestinationsGrid';
+import { TransportPricingSection } from '../home/TransportPricingSection';
 import { ResidencyHighlight } from '../home/ResidencyHighlight';
 import { PropertyInvestmentHighlight } from '../home/PropertyInvestmentHighlight';
 import { CompanyRegistrationHighlight } from '../home/CompanyRegistrationHighlight';
@@ -70,6 +71,9 @@ export const HomePage: React.FC<HomePageProps> = ({
         onNavigate={onNavigate}
         onOpenConsultation={onOpenConsultation}
       />
+
+      {/* 5a. Transport & Day Trip Pricing */}
+      <TransportPricingSection />
 
       {/* 6. TRC & Residency Highlight */}
       <ResidencyHighlight

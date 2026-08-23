@@ -14,25 +14,25 @@ export const PinterestInspirationSection: React.FC<PinterestInspirationSectionPr
     {
       title: 'Baku Flame Towers at Night',
       subtitle: 'Caspian Sea Promenade & Highland Park',
-      image: 'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=800&q=80',
+      image: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/08/Flame_towers_baku.jpg/1280px-Flame_towers_baku.jpg',
       category: 'Baku Luxury',
     },
     {
       title: 'Shahdag Mountain Winter Ski',
       subtitle: 'Caucasus Alpine Resort & Cable Cars',
-      image: 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=800&q=80',
+      image: '/images/destinations/shahdag/shahdag-ski-slopes.jpg',
       category: 'Shahdag Ski',
     },
     {
       title: 'Nohur Lake Serenity in Gabala',
       subtitle: 'Emerald Waters & Caucasian Forests',
-      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+      image: '/images/destinations/shahdag/nohur-lake.jpg',
       category: 'Gabala Nature',
     },
     {
       title: 'UNESCO Old City (Icherisheher)',
       subtitle: 'Ancient Maiden Tower & Shirvanshah Palace',
-      image: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Baku_Montage.jpg/1280px-Baku_Montage.jpg',
       category: 'Heritage',
     },
   ];

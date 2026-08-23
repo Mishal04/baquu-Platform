@@ -108,6 +108,7 @@ export interface DestinationInfo {
   bestTimeToVisit: string;
   keyActivities: string[];
   distanceFromBaku: string;
+  galleryImages?: { title: string; image: string }[];
 }
 
 export interface ContactInquiry {

@@ -1,3 +1,5 @@
+
+
 import { TourPackage, PropertyListing, BlogPost, AffiliatePartner, DestinationInfo, SiteSettings } from '../types';
 
 export const INITIAL_SITE_SETTINGS: SiteSettings = {
@@ -62,12 +64,12 @@ export const INITIAL_TOURS: TourPackage[] = [
     published: true,
     shortDescription: 'Discover the perfect blend of modern luxury, ancient heritage, vibrant culture, and Caucasus mountain scenery on our complete 10-day signature tour from Pakistan.',
     fullDescription: 'Discover the perfect blend of modern luxury, ancient heritage, vibrant culture, and breathtaking Caucasus mountain beauty. This comprehensive 10-day tour package from Pakistan covers historic Baku Old City, the pristine Shahdag Mountain Resort, the mystical Absheron Peninsula fire temples, and prehistoric Gobustan rock petroglyphs and bubbling mud volcanoes. Includes 4-star city-center hotel accommodation, return airfare assistance, Azerbaijan visa coordination, daily breakfast, and private luxury transport with professional English/Urdu speaking guides.',
-    image: 'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/en/d/d3/Heydar_Aliyev_Cultural_Center.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1000&q=80'
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1280px-Flame_towers_from_Baku_boulevard.JPG',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Shahdag01.jpg/1280px-Shahdag01.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Qobustan_giri%C5%9F_qayas%C4%B1_2026_%281%29.jpg/1280px-Qobustan_giri%C5%9F_qayas%C4%B1_2026_%281%29.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Baku_Montage.jpg/1280px-Baku_Montage.jpg'
     ],
     inclusions: [
       'Return Air Ticket from Pakistan',
@@ -209,11 +211,11 @@ export const INITIAL_TOURS: TourPackage[] = [
     published: true,
     shortDescription: 'The quintessential Azerbaijan journey covering historic Icherisheher, modern Flame Towers, ancient Gobustan petroglyphs and eternal flames of Yanardag.',
     fullDescription: 'Discover the harmonious blend of ancient Silk Road heritage and futuristic architecture in Baku. Our signature 5-day package provides private airport transfers, 4-star city-center accommodation, guided tours of Old City Baku, Gobustan Rock Art, Mud Volcanoes, Ateshgah Fire Temple, and panoramic Caspian Sea views.',
-    image: 'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Qobustan_giri%C5%9F_qayas%C4%B1_2026_%281%29.jpg/1280px-Qobustan_giri%C5%9F_qayas%C4%B1_2026_%281%29.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1000&q=80'
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1280px-Flame_towers_from_Baku_boulevard.JPG',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Baku_Montage.jpg/1280px-Baku_Montage.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Qobustan_giri%C5%9F_qayas%C4%B1_2026_%281%29.jpg/1280px-Qobustan_giri%C5%9F_qayas%C4%B1_2026_%281%29.jpg'
     ],
     inclusions: [
       '4 Nights Accommodation in 4-Star Baku Hotel with daily breakfast',
@@ -308,10 +310,10 @@ export const INITIAL_TOURS: TourPackage[] = [
     published: true,
     shortDescription: 'Experience the pristine beauty of the Greater Caucasus mountains, world-class ski slopes in winter, alpine coaster, cable cars, and lush Quba apple orchards.',
     fullDescription: 'Escape to Azerbaijan’s premier mountain paradise. Whether you want winter skiing and snowboarding or summer alpine hiking, roller-coaster rides, and quad biking, Shahdag Resort delivers unforgettable luxury and natural beauty.',
-    image: 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Shahdag01.jpg/1280px-Shahdag01.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80'
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Shahdag01.jpg/1280px-Shahdag01.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Quba_385.jpg/1280px-Quba_385.jpg'
     ],
     inclusions: [
       '3 Nights in Luxury Mountain Resort with breakfast',
@@ -383,10 +385,10 @@ export const INITIAL_TOURS: TourPackage[] = [
     published: true,
     shortDescription: 'Travel through the ancient Silk Road route to the emerald lake of Nohur, Tufandag mountain resort, Gabaland, and the stained-glass Palace of Sheki Khans.',
     fullDescription: 'Immerse yourself in Azerbaijan’s lush northwestern region. Experience the serene Nohur Lake, Seven Beauties (Yeddi Gozel) Waterfall, shoot sport club, Tufandag cable cars in Gabala, and the UNESCO World Heritage town of Sheki with its 18th-century Sheki Khans Palace and authentic Caravanserai.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tufandag.jpg/1280px-Tufandag.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80'
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tufandag.jpg/1280px-Tufandag.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/%C5%9E%C9%99ki_xan_saray%C4%B1.jpg/1280px-%C5%9E%C9%99ki_xan_saray%C4%B1.jpg'
     ],
     inclusions: [
       '2 Nights in Baku + 1 Night in Gabala + 1 Night in Sheki in 4/5-star hotels',
@@ -467,9 +469,9 @@ export const INITIAL_TOURS: TourPackage[] = [
     published: true,
     shortDescription: 'An opulent romantic getaway featuring five-star luxury suites, private Caspian yacht cruise, candlelit dinners, and mountain wellness.',
     fullDescription: 'Designed exclusively for honeymooners and romantic escapes. Indulge in premier 5-star suites at Fairmont Baku (Flame Towers), private sunset yacht cruise on the Caspian Sea, couple spa treatments, and breathtaking private excursions.',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Flame_Towers.jpg/1280px-Flame_Towers.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80'
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Flame_Towers.jpg/1280px-Flame_Towers.jpg'
     ],
     inclusions: [
       '5 Nights in 5-Star Luxury Suites with Caspian Sea / Mountain views',
@@ -646,7 +648,7 @@ export const INITIAL_BLOG_POSTS: BlogPost[] = [
     author: 'SIRFPK Visa Advisory Team',
     date: 'February 2026',
     readTime: '6 min read',
-    featuredImage: 'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=1200&q=80',
+    featuredImage: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80',
     excerpt: 'Step-by-step guidance on applying for the Azerbaijan ASAN Visa from Pakistan, required passport validity, fees, common rejection reasons, and turnaround times.',
     content: [
       'Traveling from Pakistan to Azerbaijan has become significantly streamlined with the official ASAN e-Visa system. Azerbaijan has rapidly grown into one of the most popular travel destinations for Pakistani tourists, families, business delegations, and students.',
@@ -676,7 +678,7 @@ export const INITIAL_BLOG_POSTS: BlogPost[] = [
     author: 'SIRFPK Travel Desk',
     date: 'January 2026',
     readTime: '8 min read',
-    featuredImage: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
+    featuredImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Baku_Montage.jpg/1280px-Baku_Montage.jpg',
     excerpt: 'From the medieval charm of Icherisheher to the hyper-modern curves of Heydar Aliyev Center and the bubbling mud volcanoes of Gobustan.',
     content: [
       'Baku is famously nicknamed the "City of Winds" and the "Paris of the East". It seamlessly unites millennia-old Silk Road caravanserais with cutting-edge 21st-century architectural wonders.',
@@ -956,7 +958,7 @@ export const INITIAL_DESTINATIONS: DestinationInfo[] = [
     id: 'baku',
     name: 'Baku',
     tagline: 'The Cosmopolitan Capital of Winds & Flame',
-    image: 'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1280px-Flame_towers_from_Baku_boulevard.JPG',
     shortDescription: 'Azerbaijan’s futuristic yet historic capital on the Caspian Sea, blending UNESCO medieval alleys with the iconic Flame Towers and Zaha Hadid architecture.',
     highlights: ['UNESCO Old City (Icherisheher)', 'Flame Towers Skyline', 'Baku Boulevard & Little Venice', 'Nizami Street Shopping'],
     bestTimeToVisit: 'April - June & September - November',
@@ -967,29 +969,113 @@ export const INITIAL_DESTINATIONS: DestinationInfo[] = [
     id: 'shahdag',
     name: 'Shahdag',
     tagline: 'Premier Mountain & Alpine Ski Resort',
-    image: 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Shahdag01.jpg/1280px-Shahdag01.jpg',
     shortDescription: 'World-class mountain paradise in the Greater Caucasus offering winter ski slopes, alpine coasters, paragliding, and luxury mountain wellness chalets.',
     highlights: ['Alpine Ski Slopes', 'Mountain Cable Cars', 'Roller Coaster & Zip-lines', 'Luxury Spa Hotels'],
     bestTimeToVisit: 'Dec - March (Skiing) & June - Sept (Hiking)',
     keyActivities: ['Skiing & Snowboarding', 'Alpine Coaster', 'Quad Biking', 'Cable Car Rides'],
-    distanceFromBaku: '210 km (3.5 hours drive)'
+    distanceFromBaku: '210 km (3.5 hours drive)',
+    galleryImages: [
+      {
+        title: 'Shahdag Mountain Resort',
+        image: '/images/destinations/shahdag/shahdag-mountain-resort.jpg',
+      },
+      {
+        title: 'Shahdag Mountain Resort (Night)',
+        image: '/images/destinations/shahdag/shahdag-mountain-resort-2.jpg',
+      },
+      {
+        title: 'Shahdag Mountain Resort (Summer)',
+        image: '/images/destinations/shahdag/shahdag-mountain-resort-3.jpg',
+      },
+      {
+        title: 'Shahdag Cable Car',
+        image: '/images/destinations/shahdag/shahdag-cable-car.jpg',
+      },
+      {
+        title: 'Shahdag Coaster',
+        image: '/images/destinations/shahdag/shahdag-coaster.jpg',
+      },
+      {
+        title: 'Shahdag Snow Park',
+        image: '/images/destinations/shahdag/shahdag-snow-park.jpg',
+      },
+      {
+        title: 'Shahdag Quad Bike',
+        image: '/images/destinations/shahdag/shahdag-quad-bike.jpg',
+      },
+      {
+        title: 'Shahdag Ski Slopes',
+        image: '/images/destinations/shahdag/shahdag-ski-slopes.jpg',
+      },
+      {
+        title: 'Shahdag Panorama Viewpoint',
+        image: '/images/destinations/shahdag/shahdag-panorama-viewpoint.jpg',
+      },
+      {
+        title: 'Red Village',
+        image: '/images/destinations/shahdag/red-village.jpg',
+      },
+      {
+        title: 'Qusar Forest',
+        image: '/images/destinations/shahdag/qusar-forest.jpg',
+      },
+      {
+        title: 'Qusar Forest (Autumn)',
+        image: '/images/destinations/shahdag/qusar-forest-2.jpg',
+      },
+      {
+        title: 'Qusar City',
+        image: '/images/destinations/shahdag/qusar-city.jpg',
+      },
+    ],
   },
   {
     id: 'gabala',
     name: 'Gabala',
     tagline: 'Emerald Lakes, Lush Valleys & Tufandag',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tufandag.jpg/1280px-Tufandag.jpg',
     shortDescription: 'Surrounded by pine forests and waterfalls, Gabala is known as the Switzerland of Azerbaijan with peaceful Nohur Lake and Tufandag mountain cable cars.',
     highlights: ['Nohur Lake Boating', 'Tufandag Cable Car', 'Seven Beauties Waterfall', 'Gabala Shooting Club'],
     bestTimeToVisit: 'May - October',
     keyActivities: ['Lake Boating', 'Horseback Riding', 'Shooting Club', 'Nature Photography'],
-    distanceFromBaku: '220 km (3 hours drive)'
+    distanceFromBaku: '220 km (3 hours drive)',
+    galleryImages: [
+      {
+        title: 'Nohur Lake',
+        image: '/images/destinations/gabala/nohur-lake.jpg',
+      },
+      {
+        title: 'Nohur Lake (Lakeside Resort)',
+        image: '/images/destinations/gabala/nohur-lake-2.jpg',
+      },
+      {
+        title: 'Seven Beauties Waterfall (Yeddi Gozel)',
+        image: '/images/destinations/gabala/seven-beauties-waterfall.jpg',
+      },
+      {
+        title: 'Yeddi Gozel Waterfall',
+        image: '/images/destinations/gabala/yeddi-gozel-waterfall.jpg',
+      },
+      {
+        title: 'Gabala Cable Car',
+        image: '/images/destinations/gabala/gabala-cable-car.jpg',
+      },
+      {
+        title: 'Gabala Archaeological Center',
+        image: '/images/destinations/gabala/gabala-archaeological-center.jpg',
+      },
+      {
+        title: 'Diri Baba Tomb',
+        image: '/images/destinations/gabala/diri-baba-tomb.jpg',
+      },
+    ],
   },
   {
     id: 'quba',
     name: 'Quba',
     tagline: 'Carpet Capital & Apple Orchard Valleys',
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Quba_385.jpg/1280px-Quba_385.jpg',
     shortDescription: 'Famous for its sweet apple orchards, intricate carpet weaving masterclasses, Gachresh forest, and the ancient Jewish Red Settlement (Krasnaya Sloboda).',
     highlights: ['Quba Carpet Factories', 'Krasnaya Sloboda Red Village', 'Gachresh Forest', 'Afurdja Waterfall'],
     bestTimeToVisit: 'May - October',
@@ -1000,7 +1086,7 @@ export const INITIAL_DESTINATIONS: DestinationInfo[] = [
     id: 'gobustan',
     name: 'Gobustan & Mud Volcanoes',
     tagline: 'Prehistoric Rock Petroglyphs & Bubbling Volcanoes',
-    image: 'https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Qobustan_giri%C5%9F_qayas%C4%B1_2026_%281%29.jpg/1280px-Qobustan_giri%C5%9F_qayas%C4%B1_2026_%281%29.jpg',
     shortDescription: 'A moon-like UNESCO national park featuring 40,000-year-old rock engravings and over 300 mineral-rich bubbling mud volcanoes.',
     highlights: ['40,000-year-old Rock Engravings', 'Active Bubbling Mud Volcanoes', 'Prehistoric Musical Gaval Dash Stone'],
     bestTimeToVisit: 'All year round (Best Spring & Autumn)',
@@ -1011,22 +1097,89 @@ export const INITIAL_DESTINATIONS: DestinationInfo[] = [
     id: 'absheron',
     name: 'Absheron Peninsula',
     tagline: 'The Mystical Land of Eternal Fire',
-    image: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Ateshgah_Fire_Temple.jpg/1280px-Ateshgah_Fire_Temple.jpg',
     shortDescription: 'The sacred birthplace of fire legends, featuring the 17th-century Ateshgah Fire Temple, Yanardag burning mountain, and Mardakan medieval fortress castles.',
     highlights: ['Ateshgah Fire Temple', 'Yanardag Burning Mountain', 'Mardakan Quadrangular Castle', 'Sea Breeze Beach Resort'],
     bestTimeToVisit: 'All year round',
     keyActivities: ['Historical Excursion', 'Beach Club Dining', 'Sunset at Yanardag'],
-    distanceFromBaku: '25 km (30 minutes drive)'
+    distanceFromBaku: '25 km (30 minutes drive)',
+    galleryImages: [
+      {
+        title: 'Ateshgah Fire Temple',
+        image: '/images/destinations/absheron/ateshgah-fire-temple.jpg',
+      },
+      {
+        title: 'Yanardag Burning Mountain',
+        image: '/images/destinations/absheron/yanardag-burning-mountain.jpg',
+      },
+      {
+        title: 'Yanardag Burning Mountain (Night)',
+        image: '/images/destinations/absheron/yanardag-burning-mountain-2.jpg',
+      },
+      {
+        title: 'Mud Volcano',
+        image: '/images/destinations/absheron/mud-volcano.jpg',
+      },
+      {
+        title: 'Mud Volcanoes (Aerial)',
+        image: '/images/destinations/absheron/mud-volcano-2.jpg',
+      },
+      {
+        title: 'Mud Volcano (Blue Crater)',
+        image: '/images/destinations/absheron/mud-volcano-3.jpg',
+      },
+    ],
   },
   {
     id: 'sheki',
     name: 'Sheki',
     tagline: 'UNESCO Ancient Silk Road & Stained-Glass Palace',
-    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/%C5%9E%C9%99ki_xan_saray%C4%B1.jpg/1280px-%C5%9E%C9%99ki_xan_saray%C4%B1.jpg',
     shortDescription: 'One of the oldest Silk Road hubs in the Caucasus, celebrated for the 18th-century Palace of Sheki Khans with hand-crafted Shebeke stained glass and authentic sweet Sheki Halva.',
     highlights: ['Palace of Sheki Khans (UNESCO)', 'Sheki Caravanserai', 'Kish Albanian Church', 'Sheki Halva Workshops'],
     bestTimeToVisit: 'April - October',
     keyActivities: ['Silk & Halva Tasting', 'Heritage Walking Tour', 'Handicraft Shopping'],
-    distanceFromBaku: '300 km (4.5 hours drive)'
+    distanceFromBaku: '300 km (4.5 hours drive)',
+    galleryImages: [
+      {
+        title: "Sheki Khan's Palace",
+        image: '/images/destinations/sheki/sheki-khans-palace.jpg',
+      },
+      {
+        title: "Sheki Khan's Palace (Detail)",
+        image: '/images/destinations/sheki/sheki-khans-palace-2.jpg',
+      },
+      {
+        title: 'Sheki Caravanserai',
+        image: '/images/destinations/sheki/sheki-caravanserai.jpg',
+      },
+      {
+        title: 'Sheki Caravanserai (Garden Courtyard)',
+        image: '/images/destinations/sheki/sheki-caravanserai-2.jpg',
+      },
+      {
+        title: 'Sheki Old Town',
+        image: '/images/destinations/sheki/sheki-old-town.jpg',
+      },
+      {
+        title: 'Church of Kish',
+        image: '/images/destinations/sheki/sheki-church-of-kish.jpg',
+      },
+      {
+        title: 'Yukhari Bash Mosque',
+        image: '/images/destinations/sheki/yukhari-bash-mosque.jpg',
+      },
+      {
+        title: 'Lower Caravanserai',
+        image: '/images/destinations/sheki/sheki-caravanserai-2.jpg',
+      },
+    ],
   }
 ];
+
+export const ONE_NIGHT_STAY_SURCHARGE = {
+  label: 'One Night Stay in Shahdag, Gabala, or Sheki',
+  price: 90,
+  currency: 'AZN',
+  note: 'Add only 90 AZN for tourist — flat rate, applies to both Sedan and Vito bookings.',
+};

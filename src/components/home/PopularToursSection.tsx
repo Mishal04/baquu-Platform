@@ -113,7 +113,7 @@ export const PopularToursSection: React.FC<PopularToursSectionProps> = ({
                     </span>
                     <div className="flex items-baseline gap-1">
                       <span className="text-2xl font-black text-amber-600 font-serif">
-                        ${tour.startingPrice}
+                        {tour.currency === 'PKR' ? 'PKR ' : tour.currency === 'USD' ? '$' : tour.currency + ' '}{tour.startingPrice.toLocaleString()}
                       </span>
                       <span className="text-[11px] text-slate-500">/ person</span>
                     </div>

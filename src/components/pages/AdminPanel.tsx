@@ -66,7 +66,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   );
   const [pinLink, setPinLink] = useState('https://www.sirfpk.com/tours');
   const [pinImageUrl, setPinImageUrl] = useState(
-    'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=800&q=80'
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1280px-Flame_towers_from_Baku_boulevard.JPG'
   );
   const [pinBoardId, setPinBoardId] = useState('azerbaijan-travel');
   const [pinStatus, setPinStatus] = useState<string | null>(null);

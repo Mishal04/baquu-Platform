@@ -35,7 +35,7 @@ export const WatermarkedImage: React.FC<WatermarkedImageProps> = ({
         onError={(e) => {
           // Fallback image if unsplash link fails
           (e.target as HTMLImageElement).src =
-            'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=800&q=80';
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1280px-Flame_towers_from_Baku_boulevard.JPG';
         }}
       />
       {showWatermark && (

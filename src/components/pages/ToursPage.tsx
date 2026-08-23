@@ -101,7 +101,7 @@ export const ToursPage: React.FC<ToursPageProps> = ({
                   </span>
                   <div className="flex items-baseline gap-1">
                     <span className="text-3xl font-black text-amber-400 font-serif">
-                      ${selectedTour.startingPrice}
+                      {selectedTour.currency === 'PKR' ? 'PKR ' : selectedTour.currency === 'USD' ? '$' : selectedTour.currency + ' '}{selectedTour.startingPrice.toLocaleString()}
                     </span>
                     <span className="text-xs text-slate-400">/ person</span>
                   </div>
@@ -335,7 +335,7 @@ export const ToursPage: React.FC<ToursPageProps> = ({
                     </span>
                     <div className="flex items-baseline gap-1">
                       <span className="text-2xl font-black text-amber-400 font-serif">
-                        ${tour.startingPrice}
+                        {tour.currency === 'PKR' ? 'PKR ' : tour.currency === 'USD' ? '$' : tour.currency + ' '}{tour.startingPrice.toLocaleString()}
                       </span>
                       <span className="text-[11px] text-slate-400">/ person</span>
                     </div>

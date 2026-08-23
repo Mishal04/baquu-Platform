@@ -30,7 +30,7 @@ const INITIAL_MEDIA: MediaItem[] = [
   {
     id: 'm1',
     title: 'Baku Flame Towers & Caspian Coastline',
-    url: 'https://images.unsplash.com/photo-1579606032822-e42777085a3a?auto=format&fit=crop&w=1200&q=80',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1280px-Flame_towers_from_Baku_boulevard.JPG',
     category: 'Tours',
     destination: 'Baku',
     altText: 'Baku Flame Towers and Caspian Sea promenade - SIRFPK www.sirfpk.com',
@@ -42,7 +42,7 @@ const INITIAL_MEDIA: MediaItem[] = [
   {
     id: 'm2',
     title: 'Shahdag Mountain Alpine Resort',
-    url: 'https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1200&q=80',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Shahdag01.jpg/1280px-Shahdag01.jpg',
     category: 'Tours',
     destination: 'Shahdag',
     altText: 'Shahdag Mountain Resort Caucasus Azerbaijan - SIRFPK www.sirfpk.com',
