@@ -30,7 +30,7 @@ export const FloatingContact: React.FC<FloatingContactProps> = ({
   return (
     <>
       {/* Desktop Floating WhatsApp Widget */}
-      <div className="hidden md:block fixed bottom-6 right-6 z-40">
+      <div className="hidden md:block fixed bottom-6 left-6 z-40">
         {isOpen && (
           <div className="mb-3 w-80 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
             {/* Header */}
