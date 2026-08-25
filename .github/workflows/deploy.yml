@@ -55,13 +55,11 @@ jobs:
           echo "🔨 Building application..."
           npm run build
 
-          # ── Setup systemd service (first run only) ──
-          if [ ! -f "/etc/systemd/system/${SERVICE_NAME}.service" ]; then
-            echo "⚙️  Setting up systemd service..."
-            sudo cp "$APP_DIR/deploy/baquu-platform.service" /etc/systemd/system/${SERVICE_NAME}.service
-            sudo systemctl daemon-reload
-            sudo systemctl enable ${SERVICE_NAME}
-          fi
+          # ── Setup/update systemd service ──
+          echo "⚙️  Updating systemd service..."
+          sudo cp "$APP_DIR/deploy/baquu-platform.service" /etc/systemd/system/${SERVICE_NAME}.service
+          sudo systemctl daemon-reload
+          sudo systemctl enable ${SERVICE_NAME}
 
           # ── Load env file if exists ──
           if [ ! -f "$APP_DIR/.env" ]; then

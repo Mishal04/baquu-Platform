@@ -5,8 +5,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
+User=root
+Group=root
 WorkingDirectory=/var/www/baquu-platform
 ExecStart=/usr/bin/node dist/server.cjs
 Restart=on-failure
@@ -22,7 +22,7 @@ EnvironmentFile=-/var/www/baquu-platform/.env
 # Security hardening
 NoNewPrivileges=true
 ProtectSystem=strict
-ProtectHome=true
+ProtectHome=false
 ReadWritePaths=/var/www/baquu-platform
 
 # Logging
