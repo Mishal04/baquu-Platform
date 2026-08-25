@@ -1,0 +1,34 @@
+[Unit]
+Description=Baquu Platform - Node.js Application
+Documentation=https://github.com/Mishal04/baquu-Platform
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/baquu-platform
+ExecStart=/usr/bin/node dist/server.cjs
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60
+StartLimitBurst=3
+
+# Environment
+Environment=NODE_ENV=production
+Environment=PORT=3000
+EnvironmentFile=-/var/www/baquu-platform/.env
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/baquu-platform
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=baquu-platform
+
+[Install]
+WantedBy=multi-user.target
