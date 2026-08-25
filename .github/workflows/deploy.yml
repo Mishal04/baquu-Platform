@@ -11,76 +11,77 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🔑 Deploy via SSH
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: 22
-          script_stop: true
-          script: |
-            set -e
+      - name: 🔑 Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
 
-            # ── Configuration ──
-            APP_DIR="/var/www/baquu-platform"
-            REPO_URL="https://github.com/${{ github.repository }}.git"
-            BRANCH="main"
-            SERVICE_NAME="baquu-platform"
+      - name: 🚀 Deploy via SSH
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'DEPLOY_SCRIPT'
+          set -e
 
-            echo "🚀 Starting deployment..."
-            echo "📁 App directory: $APP_DIR"
+          APP_DIR="/var/www/baquu-platform"
+          REPO_URL="https://github.com/${{ github.repository }}.git"
+          BRANCH="main"
+          SERVICE_NAME="baquu-platform"
 
-            # ── Clone or pull ──
-            if [ ! -d "$APP_DIR/.git" ]; then
-              echo "📥 First deploy — cloning repository..."
-              sudo mkdir -p "$APP_DIR"
-              sudo chown $USER:$USER "$APP_DIR"
-              git clone --branch "$BRANCH" "$REPO_URL" "$APP_DIR"
-            else
-              echo "📥 Pulling latest changes..."
-              cd "$APP_DIR"
-              git fetch origin "$BRANCH"
-              git reset --hard "origin/$BRANCH"
-              git clean -fd
-            fi
+          echo "🚀 Starting deployment..."
+          echo "📁 App directory: $APP_DIR"
 
+          # ── Clone or pull ──
+          if [ ! -d "$APP_DIR/.git" ]; then
+            echo "📥 First deploy — cloning repository..."
+            sudo mkdir -p "$APP_DIR"
+            sudo chown $USER:$USER "$APP_DIR"
+            git clone --branch "$BRANCH" "$REPO_URL" "$APP_DIR"
+          else
+            echo "📥 Pulling latest changes..."
             cd "$APP_DIR"
+            git fetch origin "$BRANCH"
+            git reset --hard "origin/$BRANCH"
+            git clean -fd
+          fi
 
-            # ── Install dependencies ──
-            echo "📦 Installing dependencies..."
-            npm ci --production=false
+          cd "$APP_DIR"
 
-            # ── Build ──
-            echo "🔨 Building application..."
-            npm run build
+          # ── Install dependencies ──
+          echo "📦 Installing dependencies..."
+          npm ci --production=false
 
-            # ── Setup systemd service (first run only) ──
-            if [ ! -f "/etc/systemd/system/${SERVICE_NAME}.service" ]; then
-              echo "⚙️  Setting up systemd service..."
-              sudo cp "$APP_DIR/deploy/baquu-platform.service" /etc/systemd/system/${SERVICE_NAME}.service
-              sudo systemctl daemon-reload
-              sudo systemctl enable ${SERVICE_NAME}
-            fi
+          # ── Build ──
+          echo "🔨 Building application..."
+          npm run build
 
-            # ── Load env file if exists ──
-            if [ ! -f "$APP_DIR/.env" ]; then
-              echo "⚠️  No .env file found. Copy .env.example and fill in your values:"
-              echo "   cp $APP_DIR/.env.example $APP_DIR/.env"
-            fi
+          # ── Setup systemd service (first run only) ──
+          if [ ! -f "/etc/systemd/system/${SERVICE_NAME}.service" ]; then
+            echo "⚙️  Setting up systemd service..."
+            sudo cp "$APP_DIR/deploy/baquu-platform.service" /etc/systemd/system/${SERVICE_NAME}.service
+            sudo systemctl daemon-reload
+            sudo systemctl enable ${SERVICE_NAME}
+          fi
 
-            # ── Restart service ──
-            echo "🔄 Restarting service..."
-            sudo systemctl restart ${SERVICE_NAME}
+          # ── Load env file if exists ──
+          if [ ! -f "$APP_DIR/.env" ]; then
+            echo "⚠️  No .env file found. Copy .env.example and fill in your values:"
+            echo "   cp $APP_DIR/.env.example $APP_DIR/.env"
+          fi
 
-            # ── Verify ──
-            sleep 3
-            if sudo systemctl is-active --quiet ${SERVICE_NAME}; then
-              echo "✅ Deployment successful! Service is running."
-            else
-              echo "❌ Service failed to start. Checking logs..."
-              sudo journalctl -u ${SERVICE_NAME} --no-pager -n 20
-              exit 1
-            fi
+          # ── Restart service ──
+          echo "🔄 Restarting service..."
+          sudo systemctl restart ${SERVICE_NAME}
 
-            echo "🎉 Deployment complete!"
+          # ── Verify ──
+          sleep 3
+          if sudo systemctl is-active --quiet ${SERVICE_NAME}; then
+            echo "✅ Deployment successful! Service is running."
+          else
+            echo "❌ Service failed to start. Checking logs..."
+            sudo journalctl -u ${SERVICE_NAME} --no-pager -n 20
+            exit 1
+          fi
+
+          echo "🎉 Deployment complete!"
+          DEPLOY_SCRIPT
