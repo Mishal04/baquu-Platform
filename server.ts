@@ -3,6 +3,7 @@ import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import jwt from 'jsonwebtoken';
+import rateLimit from 'express-rate-limit';
 import 'dotenv/config';
 
 async function startServer() {
@@ -10,6 +11,15 @@ async function startServer() {
   const PORT = parseInt(process.env.PORT || '3001', 10);
 
   app.use(express.json({ limit: '10mb' }));
+
+  // Rate limiter for admin login — max 10 attempts per 15 minutes per IP
+  const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 10,
+    message: { success: false, error: 'Too many login attempts. Please try again in 15 minutes.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
 
   // Initialize Gemini client lazily
   let aiClient: GoogleGenAI | null = null;
@@ -42,7 +52,7 @@ async function startServer() {
   const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 
   // POST /api/admin/login — validate credentials server-side, return signed JWT
-  app.post('/api/admin/login', (req, res) => {
+  app.post('/api/admin/login', loginLimiter, (req, res) => {
     const { email, password } = req.body || {};
     if (!email || !password) {
       return res.status(400).json({ success: false, error: 'Email and password are required.' });
