@@ -23,6 +23,13 @@ const KEYS = {
   AFFILIATES: 'sirfpk_affiliates_v1',
   INQUIRIES: 'sirfpk_inquiries_v1',
   MEDIA: 'sirfpk_media_v1',
+  ADMIN_CREDS: 'sirfpk_admin_creds_v1',
+  ADMIN_AUTH: 'sirfpk_admin_auth_v1',
+};
+
+const DEFAULT_ADMIN_CREDS = {
+  email: 'syedkashifsaleem@gmail.com',
+  password: 'admin123',
 };
 
 // Initial media items
@@ -275,5 +282,46 @@ export const StorageService = {
     localStorage.setItem(KEYS.BLOGS, JSON.stringify(INITIAL_BLOG_POSTS));
     localStorage.setItem(KEYS.AFFILIATES, JSON.stringify(INITIAL_AFFILIATE_PARTNERS));
     localStorage.setItem(KEYS.MEDIA, JSON.stringify(INITIAL_MEDIA));
+  },
+
+  // Admin Credentials Management
+  getAdminCredentials(): { email: string; password: string } {
+    try {
+      const data = localStorage.getItem(KEYS.ADMIN_CREDS);
+      return data ? JSON.parse(data) : DEFAULT_ADMIN_CREDS;
+    } catch {
+      return DEFAULT_ADMIN_CREDS;
+    }
+  },
+  saveAdminCredentials(creds: { email: string; password: string }): void {
+    localStorage.setItem(KEYS.ADMIN_CREDS, JSON.stringify(creds));
+  },
+
+  // Admin Session Management
+  getAdminAuthSession(): boolean {
+    try {
+      const localSession = localStorage.getItem(KEYS.ADMIN_AUTH);
+      const sessionSession = sessionStorage.getItem(KEYS.ADMIN_AUTH);
+      return localSession === 'true' || sessionSession === 'true';
+    } catch {
+      return false;
+    }
+  },
+  setAdminAuthSession(authenticated: boolean, remember: boolean = true): void {
+    if (authenticated) {
+      if (remember) {
+        localStorage.setItem(KEYS.ADMIN_AUTH, 'true');
+        sessionStorage.removeItem(KEYS.ADMIN_AUTH);
+      } else {
+        sessionStorage.setItem(KEYS.ADMIN_AUTH, 'true');
+        localStorage.removeItem(KEYS.ADMIN_AUTH);
+      }
+    } else {
+      this.clearAdminAuthSession();
+    }
+  },
+  clearAdminAuthSession(): void {
+    localStorage.removeItem(KEYS.ADMIN_AUTH);
+    sessionStorage.removeItem(KEYS.ADMIN_AUTH);
   },
 };

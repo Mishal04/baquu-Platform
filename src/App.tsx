@@ -22,6 +22,7 @@ import { AffiliateTravelPage } from './components/pages/AffiliateTravelPage';
 import { BlogPage } from './components/pages/BlogPage';
 import { ContactPage } from './components/pages/ContactPage';
 import { AdminPanel } from './components/pages/AdminPanel';
+import { AdminLoginForm } from './components/admin/AdminLoginForm';
 
 export default function App() {
   // Navigation State
@@ -44,6 +45,11 @@ export default function App() {
   const [consultationService, setConsultationService] = useState<string>('Azerbaijan Travel Package');
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalTopic, setLegalTopic] = useState<string>('disclaimers');
+
+  // Admin Authentication State
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(
+    () => StorageService.getAdminAuthSession()
+  );
 
   // Sync state with storage on admin updates or initial load
   const reloadData = () => {
@@ -247,11 +253,22 @@ export default function App() {
           />
         )}
 
-        {currentRoute === 'admin' && (
+        {currentRoute === 'admin' && !isAdminAuthenticated && (
+          <AdminLoginForm
+            onLoginSuccess={() => setIsAdminAuthenticated(true)}
+            onNavigateHome={() => handleNavigate('home')}
+          />
+        )}
+
+        {currentRoute === 'admin' && isAdminAuthenticated && (
           <AdminPanel
             siteSettings={siteSettings}
             onUpdateSiteSettings={handleUpdateSiteSettings}
             onNavigate={handleNavigate}
+            onLogout={() => {
+              setIsAdminAuthenticated(false);
+              handleNavigate('home');
+            }}
           />
         )}
       </main>

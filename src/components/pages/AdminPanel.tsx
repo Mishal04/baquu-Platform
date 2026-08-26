@@ -17,6 +17,9 @@ import {
   RefreshCw,
   Copy,
   Check,
+  LogOut,
+  KeyRound,
+  UserCog,
 } from 'lucide-react';
 import {
   TourPackage,
@@ -33,12 +36,14 @@ interface AdminPanelProps {
   onNavigate: (route: PageRoute) => void;
   siteSettings: SiteSettings;
   onUpdateSiteSettings: (settings: SiteSettings) => void;
+  onLogout: () => void;
 }
 
 export const AdminPanel: React.FC<AdminPanelProps> = ({
   onNavigate,
   siteSettings,
   onUpdateSiteSettings,
+  onLogout,
 }) => {
   const [activeTab, setActiveTab] = useState<
     'ai-generator' | 'pinterest' | 'inquiries' | 'affiliates' | 'tours' | 'properties' | 'settings'
@@ -74,10 +79,21 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   // Settings State
   const [settingsForm, setSettingsForm] = useState<SiteSettings>(siteSettings);
 
+  // Admin Account & Security State
+  const [adminEmail, setAdminEmail] = useState('');
+  const [adminCurrentPassword, setAdminCurrentPassword] = useState('');
+  const [adminNewPassword, setAdminNewPassword] = useState('');
+  const [adminConfirmPassword, setAdminConfirmPassword] = useState('');
+  const [adminCredsMsg, setAdminCredsMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [showCurrentPwd, setShowCurrentPwd] = useState(false);
+  const [showNewPwd, setShowNewPwd] = useState(false);
+
   useEffect(() => {
     setInquiries(StorageService.getInquiries());
     setAffiliates(StorageService.getAffiliatePartners());
     setSettingsForm(StorageService.getSettings());
+    const creds = StorageService.getAdminCredentials();
+    setAdminEmail(creds.email);
   }, []);
 
   // Gemini AI Generator Handler
@@ -167,6 +183,43 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     alert('Site settings saved successfully!');
   };
 
+  // Update Admin Credentials
+  const handleUpdateAdminCreds = (e: React.FormEvent) => {
+    e.preventDefault();
+    setAdminCredsMsg(null);
+    const current = StorageService.getAdminCredentials();
+    if (adminCurrentPassword !== current.password) {
+      setAdminCredsMsg({ type: 'error', text: 'Current password is incorrect.' });
+      return;
+    }
+    if (adminNewPassword.length < 6) {
+      setAdminCredsMsg({ type: 'error', text: 'New password must be at least 6 characters.' });
+      return;
+    }
+    if (adminNewPassword !== adminConfirmPassword) {
+      setAdminCredsMsg({ type: 'error', text: 'New passwords do not match.' });
+      return;
+    }
+    const newEmail = adminEmail.trim().toLowerCase();
+    if (!newEmail || !newEmail.includes('@')) {
+      setAdminCredsMsg({ type: 'error', text: 'Please enter a valid email address.' });
+      return;
+    }
+    StorageService.saveAdminCredentials({ email: newEmail, password: adminNewPassword });
+    setAdminCurrentPassword('');
+    setAdminNewPassword('');
+    setAdminConfirmPassword('');
+    setAdminCredsMsg({ type: 'success', text: 'Admin credentials updated successfully! Use the new credentials next time you log in.' });
+  };
+
+  // Logout
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to log out of the Admin Console?')) {
+      StorageService.clearAdminAuthSession();
+      onLogout();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#07132B] text-slate-200 py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -189,12 +242,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             </div>
           </div>
 
-          <button
-            onClick={() => onNavigate('home')}
-            className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold transition-colors cursor-pointer border border-slate-700"
-          >
-            ← View Live Website
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => onNavigate('home')}
+              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold transition-colors cursor-pointer border border-slate-700"
+            >
+              ← View Live Website
+            </button>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 rounded-xl bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs font-bold transition-colors cursor-pointer border border-red-800/50 flex items-center gap-1.5"
+              title="Logout from Admin Console"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              Logout
+            </button>
+          </div>
         </div>
 
         {/* Tab Navigation */}
@@ -629,6 +692,112 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
               className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors cursor-pointer"
             >
               Save Site Settings
+            </button>
+          </form>
+        )}
+
+        {/* Admin Account & Security Section (shown alongside settings) */}
+        {activeTab === 'settings' && (
+          <form
+            onSubmit={handleUpdateAdminCreds}
+            className="p-6 rounded-2xl bg-slate-900 border border-slate-700 space-y-5 text-xs max-w-4xl mt-4"
+          >
+            <div className="border-b border-slate-800 pb-3 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
+                <UserCog className="w-4.5 h-4.5 text-purple-400" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white font-serif">Admin Account &amp; Security</h3>
+                <p className="text-xs text-slate-400 mt-0.5">Update your admin login email and password.</p>
+              </div>
+            </div>
+
+            {adminCredsMsg && (
+              <div
+                className={`p-3 rounded-xl text-xs font-medium border ${
+                  adminCredsMsg.type === 'success'
+                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                    : 'bg-red-500/10 border-red-500/30 text-red-300'
+                }`}
+              >
+                {adminCredsMsg.text}
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="sm:col-span-2">
+                <label className="block text-slate-300 font-semibold mb-1">Admin Email Address</label>
+                <input
+                  type="email"
+                  required
+                  value={adminEmail}
+                  onChange={(e) => setAdminEmail(e.target.value)}
+                  placeholder="admin@sirfpk.com"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-300 font-semibold mb-1">Current Password</label>
+                <div className="relative">
+                  <input
+                    type={showCurrentPwd ? 'text' : 'password'}
+                    required
+                    value={adminCurrentPassword}
+                    onChange={(e) => setAdminCurrentPassword(e.target.value)}
+                    placeholder="Enter current password"
+                    className="w-full px-3 py-2 pr-9 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowCurrentPwd(!showCurrentPwd)}
+                    className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-500 hover:text-slate-300 transition-colors"
+                  >
+                    {showCurrentPwd ? <KeyRound className="h-3.5 w-3.5" /> : <Lock className="h-3.5 w-3.5" />}
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-slate-300 font-semibold mb-1">New Password</label>
+                <div className="relative">
+                  <input
+                    type={showNewPwd ? 'text' : 'password'}
+                    required
+                    value={adminNewPassword}
+                    onChange={(e) => setAdminNewPassword(e.target.value)}
+                    placeholder="At least 6 characters"
+                    className="w-full px-3 py-2 pr-9 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPwd(!showNewPwd)}
+                    className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-500 hover:text-slate-300 transition-colors"
+                  >
+                    {showNewPwd ? <KeyRound className="h-3.5 w-3.5" /> : <Lock className="h-3.5 w-3.5" />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-slate-300 font-semibold mb-1">Confirm New Password</label>
+                <input
+                  type="password"
+                  required
+                  value={adminConfirmPassword}
+                  onChange={(e) => setAdminConfirmPassword(e.target.value)}
+                  placeholder="Repeat new password"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition-colors cursor-pointer flex items-center gap-2"
+            >
+              <UserCog className="w-4 h-4" />
+              Update Admin Credentials
             </button>
           </form>
         )}
