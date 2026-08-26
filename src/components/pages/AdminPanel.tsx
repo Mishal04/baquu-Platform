@@ -79,21 +79,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   // Settings State
   const [settingsForm, setSettingsForm] = useState<SiteSettings>(siteSettings);
 
-  // Admin Account & Security State
-  const [adminEmail, setAdminEmail] = useState('');
-  const [adminCurrentPassword, setAdminCurrentPassword] = useState('');
-  const [adminNewPassword, setAdminNewPassword] = useState('');
-  const [adminConfirmPassword, setAdminConfirmPassword] = useState('');
-  const [adminCredsMsg, setAdminCredsMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const [showCurrentPwd, setShowCurrentPwd] = useState(false);
-  const [showNewPwd, setShowNewPwd] = useState(false);
-
   useEffect(() => {
     setInquiries(StorageService.getInquiries());
     setAffiliates(StorageService.getAffiliatePartners());
     setSettingsForm(StorageService.getSettings());
-    const creds = StorageService.getAdminCredentials();
-    setAdminEmail(creds.email);
   }, []);
 
   // Gemini AI Generator Handler
@@ -183,39 +172,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     alert('Site settings saved successfully!');
   };
 
-  // Update Admin Credentials
-  const handleUpdateAdminCreds = (e: React.FormEvent) => {
-    e.preventDefault();
-    setAdminCredsMsg(null);
-    const current = StorageService.getAdminCredentials();
-    if (adminCurrentPassword !== current.password) {
-      setAdminCredsMsg({ type: 'error', text: 'Current password is incorrect.' });
-      return;
-    }
-    if (adminNewPassword.length < 6) {
-      setAdminCredsMsg({ type: 'error', text: 'New password must be at least 6 characters.' });
-      return;
-    }
-    if (adminNewPassword !== adminConfirmPassword) {
-      setAdminCredsMsg({ type: 'error', text: 'New passwords do not match.' });
-      return;
-    }
-    const newEmail = adminEmail.trim().toLowerCase();
-    if (!newEmail || !newEmail.includes('@')) {
-      setAdminCredsMsg({ type: 'error', text: 'Please enter a valid email address.' });
-      return;
-    }
-    StorageService.saveAdminCredentials({ email: newEmail, password: adminNewPassword });
-    setAdminCurrentPassword('');
-    setAdminNewPassword('');
-    setAdminConfirmPassword('');
-    setAdminCredsMsg({ type: 'success', text: 'Admin credentials updated successfully! Use the new credentials next time you log in.' });
-  };
-
   // Logout
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to log out of the Admin Console?')) {
-      StorageService.clearAdminAuthSession();
+      StorageService.clearAdminToken();
       onLogout();
     }
   };
@@ -696,110 +656,28 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
           </form>
         )}
 
-        {/* Admin Account & Security Section (shown alongside settings) */}
+        {/* Admin Account & Security Section — server-side notice */}
         {activeTab === 'settings' && (
-          <form
-            onSubmit={handleUpdateAdminCreds}
-            className="p-6 rounded-2xl bg-slate-900 border border-slate-700 space-y-5 text-xs max-w-4xl mt-4"
-          >
+          <div className="p-6 rounded-2xl bg-slate-900 border border-slate-700 space-y-4 text-xs max-w-4xl mt-4">
             <div className="border-b border-slate-800 pb-3 flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
-                <UserCog className="w-4.5 h-4.5 text-purple-400" />
+                <UserCog className="w-4 h-4 text-purple-400" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-white font-serif">Admin Account &amp; Security</h3>
-                <p className="text-xs text-slate-400 mt-0.5">Update your admin login email and password.</p>
+                <p className="text-xs text-slate-400 mt-0.5">Login credentials are managed server-side only.</p>
               </div>
             </div>
-
-            {adminCredsMsg && (
-              <div
-                className={`p-3 rounded-xl text-xs font-medium border ${
-                  adminCredsMsg.type === 'success'
-                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
-                    : 'bg-red-500/10 border-red-500/30 text-red-300'
-                }`}
-              >
-                {adminCredsMsg.text}
-              </div>
-            )}
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="sm:col-span-2">
-                <label className="block text-slate-300 font-semibold mb-1">Admin Email Address</label>
-                <input
-                  type="email"
-                  required
-                  value={adminEmail}
-                  onChange={(e) => setAdminEmail(e.target.value)}
-                  placeholder="admin@sirfpk.com"
-                  className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
-              </div>
-
-              <div>
-                <label className="block text-slate-300 font-semibold mb-1">Current Password</label>
-                <div className="relative">
-                  <input
-                    type={showCurrentPwd ? 'text' : 'password'}
-                    required
-                    value={adminCurrentPassword}
-                    onChange={(e) => setAdminCurrentPassword(e.target.value)}
-                    placeholder="Enter current password"
-                    className="w-full px-3 py-2 pr-9 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowCurrentPwd(!showCurrentPwd)}
-                    className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-500 hover:text-slate-300 transition-colors"
-                  >
-                    {showCurrentPwd ? <KeyRound className="h-3.5 w-3.5" /> : <Lock className="h-3.5 w-3.5" />}
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-slate-300 font-semibold mb-1">New Password</label>
-                <div className="relative">
-                  <input
-                    type={showNewPwd ? 'text' : 'password'}
-                    required
-                    value={adminNewPassword}
-                    onChange={(e) => setAdminNewPassword(e.target.value)}
-                    placeholder="At least 6 characters"
-                    className="w-full px-3 py-2 pr-9 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowNewPwd(!showNewPwd)}
-                    className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-500 hover:text-slate-300 transition-colors"
-                  >
-                    {showNewPwd ? <KeyRound className="h-3.5 w-3.5" /> : <Lock className="h-3.5 w-3.5" />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-slate-300 font-semibold mb-1">Confirm New Password</label>
-                <input
-                  type="password"
-                  required
-                  value={adminConfirmPassword}
-                  onChange={(e) => setAdminConfirmPassword(e.target.value)}
-                  placeholder="Repeat new password"
-                  className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                />
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20 text-emerald-300">
+              <Lock className="w-4 h-4 mt-0.5 shrink-0 text-emerald-400" />
+              <div className="space-y-1">
+                <p className="font-semibold text-emerald-200">Credentials are stored securely on the server</p>
+                <p className="text-slate-400 leading-relaxed">
+                  Your admin email and password are stored only in the server's <code className="text-amber-300 bg-slate-800 px-1 rounded">.env</code> file — never in the browser or JavaScript bundle. To change them, update <code className="text-amber-300 bg-slate-800 px-1 rounded">ADMIN_EMAIL</code> and <code className="text-amber-300 bg-slate-800 px-1 rounded">ADMIN_PASSWORD</code> in your <code className="text-amber-300 bg-slate-800 px-1 rounded">.env</code> file and restart the server.
+                </p>
               </div>
             </div>
-
-            <button
-              type="submit"
-              className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition-colors cursor-pointer flex items-center gap-2"
-            >
-              <UserCog className="w-4 h-4" />
-              Update Admin Credentials
-            </button>
-          </form>
+          </div>
         )}
       </div>
     </div>

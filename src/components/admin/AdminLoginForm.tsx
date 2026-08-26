@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, Mail, Eye, EyeOff, ShieldCheck, ArrowLeft, AlertCircle, KeyRound } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, ShieldCheck, ArrowLeft, AlertCircle } from 'lucide-react';
 import { StorageService } from '../../services/storage';
 
 interface AdminLoginFormProps {
@@ -17,35 +17,32 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showHint, setShowHint] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      const storedCreds = StorageService.getAdminCredentials();
+    try {
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), password }),
+      });
 
-      const inputEmail = email.trim().toLowerCase();
-      const validEmail = storedCreds.email.trim().toLowerCase();
+      const data = await response.json();
 
-      if (inputEmail === validEmail && password === storedCreds.password) {
-        StorageService.setAdminAuthSession(true, rememberMe);
-        setIsSubmitting(false);
+      if (response.ok && data.success && data.token) {
+        StorageService.setAdminToken(data.token, rememberMe);
         onLoginSuccess();
       } else {
-        setIsSubmitting(false);
-        setError('Invalid admin email or password. Please check your credentials.');
+        setError(data.error || 'Invalid email or password. Please try again.');
       }
-    }, 400);
-  };
-
-  const handleFillDefaultCreds = () => {
-    const creds = StorageService.getAdminCredentials();
-    setEmail(creds.email);
-    setPassword(creds.password);
-    setError(null);
+    } catch {
+      setError('Unable to reach the server. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,7 +79,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
         {/* Login Form Container */}
         <div className="bg-slate-900/90 border border-slate-800 rounded-2xl shadow-2xl p-8 backdrop-blur-xl">
           {error && (
-            <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm flex items-start space-x-3 animate-fade-in">
+            <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm flex items-start space-x-3">
               <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -100,10 +97,12 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
                 </div>
                 <input
                   type="email"
+                  id="admin-email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="syedkashifsaleem@gmail.com"
+                  placeholder="Enter admin email"
+                  autoComplete="username"
                   className="block w-full pl-11 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-sm"
                 />
               </div>
@@ -120,10 +119,12 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
                 </div>
                 <input
                   type={showPassword ? 'text' : 'password'}
+                  id="admin-password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  autoComplete="current-password"
                   className="block w-full pl-11 pr-11 py-3 bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-sm"
                 />
                 <button
@@ -137,7 +138,7 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
             </div>
 
             {/* Remember Me */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center">
               <label className="flex items-center space-x-2 text-sm text-slate-400 cursor-pointer">
                 <input
                   type="checkbox"
@@ -168,38 +169,6 @@ export const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
               )}
             </button>
           </form>
-
-          {/* Quick Credential Fill Hint */}
-          <div className="mt-6 pt-6 border-t border-slate-800 text-center">
-            <button
-              type="button"
-              onClick={() => setShowHint(!showHint)}
-              className="inline-flex items-center text-xs text-slate-400 hover:text-emerald-400 transition-colors"
-            >
-              <KeyRound className="w-3.5 h-3.5 mr-1.5" />
-              {showHint ? 'Hide Login Credentials Hint' : 'Show Default Login Credentials'}
-            </button>
-
-            {showHint && (
-              <div className="mt-3 p-3 rounded-lg bg-slate-950/80 border border-slate-800 text-left text-xs text-slate-300 space-y-1.5">
-                <div className="flex justify-between items-center text-slate-400 font-mono">
-                  <span>Default Email:</span>
-                  <span className="text-emerald-400 select-all font-semibold">syedkashifsaleem@gmail.com</span>
-                </div>
-                <div className="flex justify-between items-center text-slate-400 font-mono">
-                  <span>Default Password:</span>
-                  <span className="text-amber-400 select-all font-semibold">admin123</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleFillDefaultCreds}
-                  className="w-full mt-2 py-1.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[11px] font-medium transition-colors text-center"
-                >
-                  Auto-fill Default Credentials
-                </button>
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Footer info */}

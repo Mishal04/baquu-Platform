@@ -2,6 +2,8 @@ import express from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 async function startServer() {
   const app = express();
@@ -33,6 +35,57 @@ async function startServer() {
       timestamp: new Date().toISOString(),
     });
   });
+
+  // ─── Admin Authentication ───────────────────────────────────────────────────
+  const JWT_SECRET = process.env.JWT_SECRET || 'sirfpk-fallback-secret-change-me';
+  const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
+
+  // POST /api/admin/login — validate credentials server-side, return signed JWT
+  app.post('/api/admin/login', (req, res) => {
+    const { email, password } = req.body || {};
+    if (!email || !password) {
+      return res.status(400).json({ success: false, error: 'Email and password are required.' });
+    }
+    const inputEmail = String(email).trim().toLowerCase();
+    const inputPassword = String(password);
+
+    if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+      console.error('[Admin Auth] ADMIN_EMAIL or ADMIN_PASSWORD not set in environment variables.');
+      return res.status(500).json({ success: false, error: 'Server authentication is not configured.' });
+    }
+
+    if (inputEmail !== ADMIN_EMAIL || inputPassword !== ADMIN_PASSWORD) {
+      // Deliberate delay to slow brute-force attempts
+      return setTimeout(() => {
+        res.status(401).json({ success: false, error: 'Invalid email or password.' });
+      }, 800);
+    }
+
+    const token = jwt.sign(
+      { role: 'admin', email: ADMIN_EMAIL },
+      JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
+    res.json({ success: true, token });
+  });
+
+  // GET /api/admin/verify — verify a JWT token is still valid
+  app.get('/api/admin/verify', (req, res) => {
+    const authHeader = req.headers.authorization || '';
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
+    if (!token) {
+      return res.status(401).json({ valid: false, error: 'No token provided.' });
+    }
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      res.json({ valid: true, decoded });
+    } catch {
+      res.status(401).json({ valid: false, error: 'Token is invalid or expired.' });
+    }
+  });
+  // ────────────────────────────────────────────────────────────────────────────
 
   // Server-side Gemini AI content assistant for Admin
   app.post('/api/gemini/generate', async (req, res) => {
