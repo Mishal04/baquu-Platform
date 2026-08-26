@@ -1,5 +1,6 @@
 import React from 'react';
-import { BookOpen, Calendar, Clock, ArrowRight, Sparkles } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { BookOpen, Calendar, Clock, ArrowRight } from 'lucide-react';
 import { BlogPost, PageRoute } from '../../types';
 import { WatermarkedImage } from '../common/WatermarkedImage';
 
@@ -14,6 +15,7 @@ export const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({
   onSelectPost,
   onNavigate,
 }) => {
+  const { t } = useTranslation();
   const latestPosts = posts.slice(0, 3);
 
   return (
@@ -23,13 +25,13 @@ export const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold uppercase tracking-wider mb-2">
               <BookOpen className="w-3.5 h-3.5 text-amber-600" />
-              <span>Azerbaijan Knowledge Hub</span>
+              <span>{t('blog.badge')}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0F172A] font-serif">
-              Latest Travel Guides & Advisory Insights
+              {t('blog.heading')}
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
-              Practical guides on visa applications, residency pathways, Baku real estate tips, and winter ski resort itineraries.
+              {t('blog.subheading')}
             </p>
           </div>
 
@@ -37,7 +39,7 @@ export const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({
             onClick={() => onNavigate('blog')}
             className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs border border-slate-800 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
           >
-            <span>View All Guides</span>
+            <span>{t('blog.viewAll')}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -84,7 +86,7 @@ export const BlogPreviewSection: React.FC<BlogPreviewSectionProps> = ({
               </div>
 
               <div className="px-6 pb-6 pt-2 flex items-center justify-between text-xs font-bold text-amber-700 border-t border-slate-100">
-                <span>Read Full Guide</span>
+                <span>{t('blog.readFull')}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </article>

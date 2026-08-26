@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Briefcase, CheckCircle, ArrowRight, Shield, Building2, FileCheck2 } from 'lucide-react';
 import { PageRoute } from '../../types';
 
@@ -11,14 +12,15 @@ export const CompanyRegistrationHighlight: React.FC<CompanyRegistrationHighlight
   onNavigate,
   onOpenConsultation,
 }) => {
+  const { t } = useTranslation();
   const steps = [
-    { num: '1', title: 'Initial Consultation', desc: 'Define business objectives, shareholding ratios, and capital structure.' },
-    { num: '2', title: 'Choose Structure', desc: 'Select LLC (Məhdud Məsuliyyətli Cəmiyyət - MMC) or Branch Office.' },
-    { num: '3', title: 'Prepare Documents', desc: 'Draft articles of association, shareholder resolutions, and notarized translations.' },
-    { num: '4', title: 'Submit Application', desc: 'Filing with the State Tax Service / Ministry of Economy single-window portal.' },
-    { num: '5', title: 'Company Registration', desc: 'Obtain official Certificate of State Registration, Tax ID (VÖEN), and ASAN Imza.' },
-    { num: '6', title: 'Bank Account Setup', desc: 'Assistance opening corporate bank accounts in AZN, USD, and EUR in Baku.' },
-    { num: '7', title: 'Ongoing Support', desc: 'Accounting, tax reporting compliance, office address, and founder TRC residency.' },
+    { num: '1', title: t('company.step1.title'), desc: t('company.step1.desc') },
+    { num: '2', title: t('company.step2.title'), desc: t('company.step2.desc') },
+    { num: '3', title: t('company.step3.title'), desc: t('company.step3.desc') },
+    { num: '4', title: t('company.step4.title'), desc: t('company.step4.desc') },
+    { num: '5', title: t('company.step5.title'), desc: t('company.step5.desc') },
+    { num: '6', title: t('company.step6.title'), desc: t('company.step6.desc') },
+    { num: '7', title: t('company.step7.title'), desc: t('company.step7.desc') },
   ];
 
   return (
@@ -30,13 +32,13 @@ export const CompanyRegistrationHighlight: React.FC<CompanyRegistrationHighlight
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-indigo-500/20 border border-indigo-400/40 text-indigo-300">
-            Corporate & Business Setup
+            {t('company.badge')}
           </span>
           <h2 className="text-2xl sm:text-4xl font-black text-white font-serif mt-3">
-            Company Registration in Azerbaijan (MMC Formation)
+            {t('company.heading')}
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 mt-2">
-            Establish your company in Baku with 100% foreign ownership, competitive corporate tax rates, and access to regional Silk Road markets.
+            {t('company.subheading')}
           </p>
         </div>
 
@@ -62,10 +64,10 @@ export const CompanyRegistrationHighlight: React.FC<CompanyRegistrationHighlight
         <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-indigo-500/40 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl backdrop-blur-md">
           <div className="space-y-2 text-center lg:text-left">
             <h3 className="text-lg sm:text-xl font-bold text-white font-serif">
-              Ready to Expand Your Business into Azerbaijan?
+              {t('company.ctaTitle')}
             </h3>
             <p className="text-xs text-slate-300 max-w-2xl">
-              100% foreign ownership allowed • Fast incorporation • Multi-currency banking • Founder TRC eligibility • Double taxation treaties.
+              {t('company.ctaBody')}
             </p>
           </div>
 
@@ -74,7 +76,7 @@ export const CompanyRegistrationHighlight: React.FC<CompanyRegistrationHighlight
               onClick={() => onNavigate('company-registration')}
               className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-xs flex items-center gap-1.5 border border-slate-600 shadow-md transition-all cursor-pointer"
             >
-              <span>View Full Business Guide</span>
+              <span>{t('company.viewGuide')}</span>
               <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
             </button>
 
@@ -82,7 +84,7 @@ export const CompanyRegistrationHighlight: React.FC<CompanyRegistrationHighlight
               onClick={() => onOpenConsultation('Company Registration & Setup')}
               className="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition-all cursor-pointer border border-amber-300/50"
             >
-              Start Your Business in Azerbaijan
+              {t('company.startBusiness')}
             </button>
           </div>
         </div>

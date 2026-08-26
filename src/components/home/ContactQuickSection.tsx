@@ -1,5 +1,6 @@
 import React from 'react';
-import { Phone, MessageCircle, Mail, Globe, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { Phone, MessageCircle } from 'lucide-react';
 import { SiteSettings } from '../../types';
 
 interface ContactQuickSectionProps {
@@ -9,38 +10,40 @@ interface ContactQuickSectionProps {
 export const ContactQuickSection: React.FC<ContactQuickSectionProps> = ({
   siteSettings,
 }) => {
+  const { t } = useTranslation();
+
   const contactBoxes = [
     {
-      country: 'Pakistan Support Line',
+      country: t('contactQuick.pk.country'),
       flag: '🇵🇰',
       number: siteSettings.phoneNumbers.pk,
       raw: '923009111130',
-      description: 'Lahore & Islamabad Client Inquiries & Tour Consultations',
-      badge: 'Main PK Helpline',
+      description: t('contactQuick.pk.desc'),
+      badge: t('contactQuick.pk.badge'),
     },
     {
-      country: 'United Kingdom Support',
+      country: t('contactQuick.uk.country'),
       flag: '🇬🇧',
       number: siteSettings.phoneNumbers.uk,
       raw: '447462273257',
-      description: 'UK & European Diaspora Consultations & Investment Advisory',
-      badge: 'UK International',
+      description: t('contactQuick.uk.desc'),
+      badge: t('contactQuick.uk.badge'),
     },
     {
-      country: 'Baku Team (Line 1)',
+      country: t('contactQuick.aze1.country'),
       flag: '🇦🇿',
       number: siteSettings.phoneNumbers.aze1,
       raw: '994504517493',
-      description: 'Baku Operations, Airport Transfers & On-Ground Coordination',
-      badge: 'Baku On-Ground',
+      description: t('contactQuick.aze1.desc'),
+      badge: t('contactQuick.aze1.badge'),
     },
     {
-      country: 'Baku Team (Line 2)',
+      country: t('contactQuick.aze2.country'),
       flag: '🇦🇿',
       number: siteSettings.phoneNumbers.aze2,
       raw: '9940509209003',
-      description: 'Company Registration & State Migration Appointments',
-      badge: 'Corporate Desk',
+      description: t('contactQuick.aze2.desc'),
+      badge: t('contactQuick.aze2.badge'),
     },
   ];
 
@@ -49,10 +52,10 @@ export const ContactQuickSection: React.FC<ContactQuickSectionProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="text-xs font-bold uppercase tracking-wider text-amber-700">
-            Reach Our Desks Directly
+            {t('contactQuick.badge')}
           </span>
           <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] font-serif mt-1">
-            4 Dedicated WhatsApp & Calling Numbers
+            {t('contactQuick.heading')}
           </h3>
         </div>
 
@@ -93,14 +96,14 @@ export const ContactQuickSection: React.FC<ContactQuickSectionProps> = ({
                   className="flex-1 py-1.5 px-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer shadow-xs"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
-                  <span>WhatsApp</span>
+                  <span>{t('contactQuick.whatsapp')}</span>
                 </a>
                 <a
                   href={`tel:${box.number}`}
                   className="py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer"
                 >
                   <Phone className="w-3.5 h-3.5 text-sky-600" />
-                  <span>Call</span>
+                  <span>{t('contactQuick.call')}</span>
                 </a>
               </div>
             </div>

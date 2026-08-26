@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Compass, Calendar, MessageCircle, ArrowRight, Star, ShieldCheck, MapPin, CheckCircle } from 'lucide-react';
 import { PageRoute, SiteSettings } from '../../types';
 
@@ -13,6 +14,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenConsultation,
   siteSettings,
 }) => {
+  const { t } = useTranslation();
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#07132B]">
       {/* Background Image with Dark Luxury Gradient Overlay */}
@@ -35,14 +37,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Flag element & Positioning Badge */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-amber-400/40 backdrop-blur-md text-slate-200 text-xs font-semibold shadow-lg">
               <span className="text-base">🇦🇿</span>
-              <span className="text-amber-400 font-bold">AZERBAIJAN PREMIER GATEWAY</span>
+              <span className="text-amber-400 font-bold">{t('hero.badge')}</span>
               <span className="text-slate-500">•</span>
-              <span className="text-slate-300">Pakistan 🇵🇰 Dedicated Support</span>
+              <span className="text-slate-300">{t('hero.badgeSub')}</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-serif leading-[1.15]">
-              CONNECTING PAKISTAN WITH{' '}
+              {t('hero.headline').split('AZERBAIJAN')[0]}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 underline decoration-amber-500/40 decoration-4">
                 AZERBAIJAN
               </span>
@@ -50,12 +52,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Subheading */}
             <h2 className="text-base sm:text-xl font-bold text-sky-200 tracking-wide font-mono">
-              Travel | Visa | TRC | Property | Business | Education
+              {t('hero.subheading')}
             </h2>
 
             {/* Supporting Text */}
             <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
-              Plan your Azerbaijan journey with professional assistance for luxury tours, ASAN e-Visa guidance, TRC residency permits, Baku property consultancy, and seamless company registration.
+              {t('hero.body')}
             </p>
 
             {/* Action Buttons */}
@@ -65,7 +67,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-[#0B1B3D] font-extrabold text-sm tracking-wide shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 cursor-pointer border border-amber-300/60"
               >
                 <Compass className="w-4 h-4" />
-                <span>Explore Azerbaijan Tours</span>
+                <span>{t('hero.exploreTours')}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -74,7 +76,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="px-6 py-3.5 rounded-xl bg-[#0B1B3D]/80 hover:bg-[#0F285C] text-white font-bold text-sm tracking-wide border border-slate-600 hover:border-amber-400/60 transition-all flex items-center gap-2 cursor-pointer backdrop-blur-md shadow-lg"
               >
                 <Calendar className="w-4 h-4 text-amber-400" />
-                <span>Book a Consultation</span>
+                <span>{t('hero.bookConsultation')}</span>
               </button>
 
               <a
@@ -86,7 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="px-5 py-3.5 rounded-xl bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-sm tracking-wide transition-all flex items-center gap-2 shadow-lg hover:shadow-emerald-600/30 backdrop-blur-md cursor-pointer border border-emerald-400/40"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp Us</span>
+                <span>{t('hero.whatsappUs')}</span>
               </a>
             </div>
 
@@ -94,19 +96,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="pt-6 border-t border-slate-700/60 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-slate-300">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Licensed Travel & Visa Desk</span>
+                <span>{t('hero.trust1')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-sky-400 shrink-0" />
-                <span>4 Direct Support Lines</span>
+                <span>{t('hero.trust2')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 text-amber-400 shrink-0 fill-amber-400" />
-                <span>Premium Itineraries</span>
+                <span>{t('hero.trust3')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Baku Local Presence</span>
+                <span>{t('hero.trust4')}</span>
               </div>
             </div>
           </div>
@@ -116,10 +118,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="relative rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#0B1B3D]/95 p-6 border border-amber-400/30 shadow-2xl backdrop-blur-md space-y-4">
               <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
-                  Featured Signature Package
+                  {t('hero.featuredBadge')}
                 </span>
                 <span className="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold">
-                  Sample Package
+                  {t('hero.samplePackage')}
                 </span>
               </div>
 
@@ -138,15 +140,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
 
               <div>
-                <h3 className="font-bold text-white text-base">Azerbaijan Explorer Tour</h3>
+                <h3 className="font-bold text-white text-base">{t('hero.featuredTitle')}</h3>
                 <p className="text-xs text-slate-300 mt-1">
-                  Baku Old City, Flame Towers, Gobustan Mud Volcanoes & Yanardag Burning Mountain.
+                  {t('hero.featuredDesc')}
                 </p>
               </div>
 
               <div className="flex items-center justify-between pt-2 border-t border-slate-800">
                 <div>
-                  <span className="text-[11px] text-slate-400 block">Starting From</span>
+                  <span className="text-[11px] text-slate-400 block">{t('hero.startingFrom')}</span>
                   <span className="text-xl font-extrabold text-amber-400 font-serif">$380</span>
                   <span className="text-[10px] text-slate-400"> / person</span>
                 </div>
@@ -154,7 +156,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   onClick={() => onNavigate('tours')}
                   className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors flex items-center gap-1"
                 >
-                  <span>View Details</span>
+                  <span>{t('hero.viewDetails')}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>

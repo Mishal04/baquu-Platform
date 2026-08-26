@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ShieldCheck, CheckCircle2, ArrowRight, FileText, UserCheck, Clock, AlertCircle } from 'lucide-react';
 import { PageRoute } from '../../types';
 
@@ -11,22 +12,23 @@ export const ResidencyHighlight: React.FC<ResidencyHighlightProps> = ({
   onNavigate,
   onOpenConsultation,
 }) => {
+  const { t } = useTranslation();
   const pathways = [
     {
-      title: 'Company / Business Setup',
-      desc: 'Form an LLC (MMC) in Azerbaijan and obtain TRC residency as a company founder or executive director.',
+      title: t('residency.pathway1.title'),
+      desc: t('residency.pathway1.desc'),
     },
     {
-      title: 'Real Estate Investment',
-      desc: 'Acquire qualifying residential or commercial property in Azerbaijan exceeding State statutory value requirements.',
+      title: t('residency.pathway2.title'),
+      desc: t('residency.pathway2.desc'),
     },
     {
-      title: 'University / Student TRC',
-      desc: 'Enroll in accredited medical, engineering, or business universities across Baku with student residency support.',
+      title: t('residency.pathway3.title'),
+      desc: t('residency.pathway3.desc'),
     },
     {
-      title: 'Family Reunification',
-      desc: 'Extend residency permits to spouses and dependent children with comprehensive document and translation support.',
+      title: t('residency.pathway4.title'),
+      desc: t('residency.pathway4.desc'),
     },
   ];
 
@@ -42,15 +44,15 @@ export const ResidencyHighlight: React.FC<ResidencyHighlightProps> = ({
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold uppercase tracking-wider">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Residency & Migration Advisory</span>
+              <span>{t('residency.badge')}</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-black text-white font-serif leading-tight">
-              Azerbaijan TRC & Temporary Residence Assistance
+              {t('residency.heading')}
             </h2>
 
             <p className="text-xs sm:text-sm text-emerald-100/80 leading-relaxed">
-              Relocate, invest, and build your future in Azerbaijan. We provide comprehensive legal document preparation, sworn translation, medical checkup assistance, and State Migration Service appointment scheduling.
+              {t('residency.body')}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -68,7 +70,7 @@ export const ResidencyHighlight: React.FC<ResidencyHighlightProps> = ({
             <div className="p-3.5 rounded-xl bg-slate-900/70 border border-amber-400/30 text-[11px] text-slate-300 flex items-start gap-2 backdrop-blur-sm">
               <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
               <span>
-                <strong className="text-amber-300">Statutory Notice:</strong> SIRFPK provides consultancy and application assistance. Approval of residence permits is subject to the decision of the relevant Azerbaijani authorities.
+                <strong className="text-amber-300">{t('residency.notice')}</strong> {t('residency.noticeText')}
               </span>
             </div>
 
@@ -77,7 +79,7 @@ export const ResidencyHighlight: React.FC<ResidencyHighlightProps> = ({
                 onClick={() => onNavigate('trc')}
                 className="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center gap-2 border border-slate-700 shadow-md cursor-pointer transition-all"
               >
-                <span>Read Complete TRC Guide</span>
+                <span>{t('residency.readGuide')}</span>
                 <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
               </button>
 
@@ -85,7 +87,7 @@ export const ResidencyHighlight: React.FC<ResidencyHighlightProps> = ({
                 onClick={() => onOpenConsultation('TRC & Residency Consultation')}
                 className="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 cursor-pointer transition-all border border-amber-300/50"
               >
-                Book TRC Consultation
+                {t('residency.bookConsultation')}
               </button>
             </div>
           </div>
@@ -96,10 +98,10 @@ export const ResidencyHighlight: React.FC<ResidencyHighlightProps> = ({
               <div className="flex items-center justify-between border-b border-emerald-800/80 pb-4">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                    TRC Application Roadmap
+                    {t('residency.roadmapBadge')}
                   </span>
                   <h3 className="text-lg font-bold text-white font-serif mt-0.5">
-                    Standard 4-Phase Process
+                    {t('residency.roadmapTitle')}
                   </h3>
                 </div>
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300">
@@ -111,23 +113,23 @@ export const ResidencyHighlight: React.FC<ResidencyHighlightProps> = ({
                 {[
                   {
                     step: '01',
-                    title: 'Initial Eligibility & Pathway Selection',
-                    detail: 'Evaluate eligibility (Business Setup, Property, or Education) and compile checklist.',
+                    title: t('residency.step1.title'),
+                    detail: t('residency.step1.detail'),
                   },
                   {
                     step: '02',
-                    title: 'Document Legalization & Notarized Translation',
-                    detail: 'Apostille, certified Azerbaijani translation, and local tax identification number (VÖEN).',
+                    title: t('residency.step2.title'),
+                    detail: t('residency.step2.detail'),
                   },
                   {
                     step: '03',
-                    title: 'Medical Clearance & Biometric Submission',
-                    detail: 'Accompaniment to certified medical facility & State Migration Service biometric appointment.',
+                    title: t('residency.step3.title'),
+                    detail: t('residency.step3.detail'),
                   },
                   {
                     step: '04',
-                    title: 'TRC Issuance & Registration',
-                    detail: 'Collection of the official Temporary Residence Card (valid 1 to 2 years, renewable).',
+                    title: t('residency.step4.title'),
+                    detail: t('residency.step4.detail'),
                   },
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-4 p-3.5 rounded-xl bg-[#08201F]/80 border border-emerald-600/30 shadow-xs hover:border-emerald-400 transition-colors">
@@ -144,7 +146,7 @@ export const ResidencyHighlight: React.FC<ResidencyHighlightProps> = ({
 
               <div className="pt-2 text-center border-t border-emerald-800/60">
                 <span className="text-[11px] text-emerald-200/80">
-                  Average Processing Time: <strong className="text-amber-300">15 to 20 Business Days</strong> from formal submission.
+                  {t('residency.avgTime')} <strong className="text-amber-300">{t('residency.avgTimeValue')}</strong> {t('residency.avgTimeSuffix')}
                 </span>
               </div>
             </div>

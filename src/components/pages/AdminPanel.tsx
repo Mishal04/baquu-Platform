@@ -647,6 +647,98 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
               </div>
             </div>
 
+            {/* Payment Details Section */}
+            <div className="border-t border-slate-800 pt-6 space-y-4">
+              <div>
+                <h4 className="text-sm font-bold text-white font-serif mb-0.5">Payment Details</h4>
+                <p className="text-[11px] text-slate-400">
+                  These details are shown to clients on booking confirmations and the contact page.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Payoneer Email</label>
+                  <input
+                    type="email"
+                    value={settingsForm.paymentDetails?.payoneerEmail ?? ''}
+                    onChange={(e) =>
+                      setSettingsForm({
+                        ...settingsForm,
+                        paymentDetails: { ...settingsForm.paymentDetails, payoneerEmail: e.target.value },
+                      })
+                    }
+                    placeholder="e.g. syedkashifsaleem@gmail.com"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs font-mono placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">UBL Account Number</label>
+                  <input
+                    type="text"
+                    value={settingsForm.paymentDetails?.ublAccountNumber ?? ''}
+                    onChange={(e) =>
+                      setSettingsForm({
+                        ...settingsForm,
+                        paymentDetails: { ...settingsForm.paymentDetails, ublAccountNumber: e.target.value },
+                      })
+                    }
+                    placeholder="e.g. 0563056326301880"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs font-mono placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">UBL Account Title (Name)</label>
+                  <input
+                    type="text"
+                    value={settingsForm.paymentDetails?.ublAccountTitle ?? ''}
+                    onChange={(e) =>
+                      setSettingsForm({
+                        ...settingsForm,
+                        paymentDetails: { ...settingsForm.paymentDetails, ublAccountTitle: e.target.value },
+                      })
+                    }
+                    placeholder="e.g. Syed Kashif Saleem"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">UBL Branch Code (optional)</label>
+                  <input
+                    type="text"
+                    value={settingsForm.paymentDetails?.ublBranchCode ?? ''}
+                    onChange={(e) =>
+                      setSettingsForm({
+                        ...settingsForm,
+                        paymentDetails: { ...settingsForm.paymentDetails, ublBranchCode: e.target.value },
+                      })
+                    }
+                    placeholder="e.g. 0563"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs font-mono placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-slate-300 font-semibold mb-1">Payment Note (shown to client)</label>
+                <textarea
+                  rows={2}
+                  value={settingsForm.paymentDetails?.additionalNote ?? ''}
+                  onChange={(e) =>
+                    setSettingsForm({
+                      ...settingsForm,
+                      paymentDetails: { ...settingsForm.paymentDetails, additionalNote: e.target.value },
+                    })
+                  }
+                  placeholder="e.g. Please send payment receipt via WhatsApp after transfer."
+                  className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                />
+              </div>
+            </div>
+
             <button
               type="submit"
               className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors cursor-pointer"

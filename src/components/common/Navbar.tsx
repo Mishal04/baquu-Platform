@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n/i18n';
 import {
   Phone,
   MessageCircle,
@@ -20,6 +22,14 @@ import {
 } from 'lucide-react';
 import { PageRoute, SiteSettings } from '../../types';
 
+// Map Navbar display codes → i18next language codes
+const LANG_CODE_MAP: Record<string, string> = {
+  EN: 'en',
+  UR: 'ur',
+  AZ: 'az',
+  RU: 'ru',
+};
+
 interface NavbarProps {
   currentRoute: PageRoute;
   onNavigate: (route: PageRoute) => void;
@@ -33,11 +43,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   siteSettings,
   onOpenConsultation,
 }) => {
+  const { t } = useTranslation();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [phoneDropdownOpen, setPhoneDropdownOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState('EN');
+  // Derive the display code from the active i18n language (default EN)
+  const [selectedLang, setSelectedLang] = useState<string>(
+    () => Object.keys(LANG_CODE_MAP).find(k => LANG_CODE_MAP[k] === i18n.language) ?? 'EN'
+  );
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -49,25 +64,25 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks: { label: string; route: PageRoute; icon?: React.ReactNode; isService?: boolean }[] = [
-    { label: 'Home', route: 'home' },
-    { label: 'Travel & Tours', route: 'tours', icon: <Compass className="w-4 h-4" /> },
-    { label: 'Azerbaijan Visa', route: 'visa', icon: <FileCheck className="w-4 h-4" /> },
-    { label: 'TRC & Residency', route: 'trc', icon: <ShieldCheck className="w-4 h-4" /> },
-    { label: 'Azerbaijan Property', route: 'property', icon: <Building className="w-4 h-4" /> },
-    { label: 'Company Registration', route: 'company-registration', icon: <Briefcase className="w-4 h-4" /> },
-    { label: 'Business Consultancy', route: 'business-consultancy', icon: <Briefcase className="w-4 h-4" /> },
-    { label: 'Student Services', route: 'student-services', icon: <GraduationCap className="w-4 h-4" /> },
-    { label: 'Book Travel (Affiliate)', route: 'affiliate-travel', icon: <Sparkles className="w-4 h-4 text-amber-400" /> },
-    { label: 'Blog', route: 'blog', icon: <BookOpen className="w-4 h-4" /> },
+    { label: t('nav.home'), route: 'home' },
+    { label: t('nav.tours'), route: 'tours', icon: <Compass className="w-4 h-4" /> },
+    { label: t('nav.visa'), route: 'visa', icon: <FileCheck className="w-4 h-4" /> },
+    { label: t('nav.trc'), route: 'trc', icon: <ShieldCheck className="w-4 h-4" /> },
+    { label: t('nav.property'), route: 'property', icon: <Building className="w-4 h-4" /> },
+    { label: t('nav.businessSetup'), route: 'company-registration', icon: <Briefcase className="w-4 h-4" /> },
+    { label: t('nav.businessSetup'), route: 'business-consultancy', icon: <Briefcase className="w-4 h-4" /> },
+    { label: t('nav.students'), route: 'student-services', icon: <GraduationCap className="w-4 h-4" /> },
+    { label: t('nav.bookTravel'), route: 'affiliate-travel', icon: <Sparkles className="w-4 h-4 text-amber-400" /> },
+    { label: t('nav.blog'), route: 'blog', icon: <BookOpen className="w-4 h-4" /> },
     { label: 'About Us', route: 'about', icon: <Info className="w-4 h-4" /> },
-    { label: 'Contact', route: 'contact', icon: <Phone className="w-4 h-4" /> },
+    { label: t('nav.contact'), route: 'contact', icon: <Phone className="w-4 h-4" /> },
   ];
 
   const phoneNumbersList = [
-    { country: 'UK / WhatsApp', number: siteSettings.phoneNumbers.uk, raw: '447462273257' },
-    { country: 'Pakistan Office', number: siteSettings.phoneNumbers.pk, raw: '923009111130' },
-    { country: 'Azerbaijan Desk 1', number: siteSettings.phoneNumbers.aze1, raw: '994504517493' },
-    { country: 'Azerbaijan Desk 2', number: siteSettings.phoneNumbers.aze2, raw: '9940509209003' },
+    { country: t('phone.uk'), number: siteSettings.phoneNumbers.uk, raw: '447462273257' },
+    { country: t('phone.pk'), number: siteSettings.phoneNumbers.pk, raw: '923009111130' },
+    { country: t('phone.aze1'), number: siteSettings.phoneNumbers.aze1, raw: '994504517493' },
+    { country: t('phone.aze2'), number: siteSettings.phoneNumbers.aze2, raw: '9940509209003' },
   ];
 
   const handleNavClick = (route: PageRoute) => {
@@ -86,10 +101,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 font-semibold text-[11px]">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-              Pakistan 🇵🇰 ⟷ Azerbaijan 🇦🇿
+              {t('topBar.bridge')}
             </span>
             <span className="hidden sm:inline text-slate-300 font-medium">
-              Connecting Travel, Residency, Property & Business
+              {t('topBar.tagline')}
             </span>
           </div>
 
@@ -102,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="flex items-center gap-1.5 text-slate-200 hover:text-amber-300 transition-colors font-medium cursor-pointer"
               >
                 <Phone className="w-3.5 h-3.5 text-amber-400" />
-                <span className="hidden md:inline">Direct Lines:</span>
+                <span className="hidden md:inline">{t('topBar.directLines')}</span>
                 <span className="text-amber-300">{siteSettings.phoneNumbers.pk}</span>
                 <ChevronDown className="w-3 h-3 text-slate-400" />
               </button>
@@ -113,7 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onMouseLeave={() => setPhoneDropdownOpen(false)}
                 >
                   <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2 border-b border-slate-800 pb-1">
-                    Official Contact Numbers
+                    {t('topBar.officialContactNumbers')}
                   </p>
                   <div className="space-y-2">
                     {phoneNumbersList.map((p, idx) => (
@@ -173,6 +188,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       key={lang.code}
                       onClick={() => {
                         setSelectedLang(lang.code);
+                        i18n.changeLanguage(LANG_CODE_MAP[lang.code]);
                         setLangDropdownOpen(false);
                       }}
                       className={`w-full text-left px-2.5 py-1.5 text-xs rounded-md transition-colors flex items-center justify-between ${
@@ -195,7 +211,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               title="Admin Portal"
             >
               <Lock className="w-3 h-3" />
-              <span className="hidden lg:inline">Admin</span>
+              <span className="hidden lg:inline">{t('nav.admin')}</span>
             </button>
           </div>
         </div>
@@ -241,7 +257,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   : 'text-slate-200 hover:text-white hover:bg-slate-800/70'
               }`}
             >
-              Home
+              {t('nav.home')}
             </button>
 
             <button
@@ -253,7 +269,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <Compass className="w-3.5 h-3.5 text-amber-400" />
-              Tours & Packages
+              {t('nav.tours')}
             </button>
 
             <button
@@ -265,7 +281,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <FileCheck className="w-3.5 h-3.5 text-sky-400" />
-              Visa Assistance
+              {t('nav.visa')}
             </button>
 
             <button
@@ -277,7 +293,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              TRC & Residency
+              {t('nav.trc')}
             </button>
 
             <button
@@ -289,7 +305,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <Building className="w-3.5 h-3.5 text-amber-400" />
-              Property
+              {t('nav.property')}
             </button>
 
             <button
@@ -301,7 +317,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <Briefcase className="w-3.5 h-3.5 text-indigo-400" />
-              Business Setup
+              {t('nav.businessSetup')}
             </button>
 
             <button
@@ -313,7 +329,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <GraduationCap className="w-3.5 h-3.5 text-violet-400" />
-              Students
+              {t('nav.students')}
             </button>
 
             <button
@@ -325,7 +341,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              Book Travel
+              {t('nav.bookTravel')}
             </button>
 
             <button
@@ -336,7 +352,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   : 'text-slate-200 hover:text-white hover:bg-slate-800/70'
               }`}
             >
-              Blog
+              {t('nav.blog')}
             </button>
 
             <button
@@ -347,7 +363,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   : 'text-slate-200 hover:text-white hover:bg-slate-800/70'
               }`}
             >
-              Contact
+              {t('nav.contact')}
             </button>
           </div>
 
@@ -357,7 +373,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => onOpenConsultation()}
               className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-black text-xs tracking-wide shadow-md shadow-amber-500/20 transition-all flex items-center gap-1.5 cursor-pointer border border-amber-300/60"
             >
-              <span>Book Consultation</span>
+              <span>{t('nav.bookConsultation')}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -368,7 +384,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => onOpenConsultation()}
               className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-bold text-xs tracking-wide shadow-sm"
             >
-              Consult
+              {t('nav.consult')}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -409,18 +425,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }}
                   className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-sm text-center shadow-md"
                 >
-                  Request a Free Consultation
+                  {t('nav.requestFreeConsultation')}
                 </button>
                 <a
                   href={`https://wa.me/923009111130?text=${encodeURIComponent(
-                    'Hello SIRFPK, I would like to inquire about Azerbaijan services.'
+                    t('mobile.whatsappInquiry')
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm text-center flex items-center justify-center gap-2"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Chat on WhatsApp (+923009111130)</span>
+                  <span>{t('nav.chatOnWhatsApp')} (+923009111130)</span>
                 </a>
               </div>
             </div>

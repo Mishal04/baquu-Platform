@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Clock, MapPin, CheckCircle, ArrowRight, MessageCircle, Star, Sparkles } from 'lucide-react';
 import { TourPackage, PageRoute } from '../../types';
 import { WatermarkedImage } from '../common/WatermarkedImage';
@@ -16,6 +17,7 @@ export const PopularToursSection: React.FC<PopularToursSectionProps> = ({
   onNavigate,
   onOpenConsultation,
 }) => {
+  const { t } = useTranslation();
   const popularTours = tours.slice(0, 3);
 
   const handleWhatsAppBooking = (tour: TourPackage) => {
@@ -33,13 +35,13 @@ export const PopularToursSection: React.FC<PopularToursSectionProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-900 text-xs font-bold uppercase tracking-wider mb-2">
               <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-              <span>Handcrafted Itineraries</span>
+              <span>{t('popularTours.badge')}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0B1B3D] font-serif">
-              Popular Azerbaijan Tour Packages
+              {t('popularTours.heading')}
             </h2>
             <p className="text-xs sm:text-sm text-slate-700 mt-1 max-w-xl">
-              Experience the best of Baku, Shahdag, Gabala, and ancient Silk Road destinations with all-inclusive private VIP arrangements.
+              {t('popularTours.subheading')}
             </p>
           </div>
 
@@ -47,7 +49,7 @@ export const PopularToursSection: React.FC<PopularToursSectionProps> = ({
             onClick={() => onNavigate('tours')}
             className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-[#0B1B3D] hover:bg-[#112755] text-amber-300 hover:text-amber-200 font-bold text-xs border border-slate-700 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
           >
-            <span>View All Tour Packages</span>
+            <span>{t('popularTours.viewAll')}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -109,13 +111,13 @@ export const PopularToursSection: React.FC<PopularToursSectionProps> = ({
                 <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">
-                      Starting From
+                      {t('popularTours.startingFrom')}
                     </span>
                     <div className="flex items-baseline gap-1">
                       <span className="text-2xl font-black text-amber-600 font-serif">
                         {tour.currency === 'PKR' ? 'PKR ' : tour.currency === 'USD' ? '$' : tour.currency + ' '}{tour.startingPrice.toLocaleString()}
                       </span>
-                      <span className="text-[11px] text-slate-500">/ person</span>
+                      <span className="text-[11px] text-slate-500">{t('popularTours.perPerson')}</span>
                     </div>
                   </div>
 
@@ -124,7 +126,7 @@ export const PopularToursSection: React.FC<PopularToursSectionProps> = ({
                       onClick={() => onSelectTour(tour)}
                       className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs transition-all cursor-pointer shadow-sm border border-amber-300/60"
                     >
-                      View Details
+                      {t('popularTours.viewDetails')}
                     </button>
                     <button
                       onClick={() => handleWhatsAppBooking(tour)}

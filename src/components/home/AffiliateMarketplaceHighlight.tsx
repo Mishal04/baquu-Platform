@@ -1,5 +1,6 @@
 import React from 'react';
-import { Sparkles, ExternalLink, ShieldCheck, ArrowRight, Plane, Hotel, Smartphone, Ticket, Car, Compass } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { Sparkles, ExternalLink, ShieldCheck, ArrowRight, Plane, Hotel, Smartphone, Car, Compass } from 'lucide-react';
 import { AffiliatePartner, PageRoute } from '../../types';
 import { StorageService } from '../../services/storage';
 
@@ -12,6 +13,7 @@ export const AffiliateMarketplaceHighlight: React.FC<AffiliateMarketplaceHighlig
   partners,
   onNavigate,
 }) => {
+  const { t } = useTranslation();
   const featuredPartners = partners.slice(0, 8);
 
   const getCategoryIcon = (category: string) => {
@@ -44,13 +46,13 @@ export const AffiliateMarketplaceHighlight: React.FC<AffiliateMarketplaceHighlig
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-900 text-xs font-bold uppercase tracking-wider mb-2">
               <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-              <span>Affiliate Travel Marketplace</span>
+              <span>{t('affiliate.badge')}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0B1B3D] font-serif">
-              BOOK YOUR TRAVEL
+              {t('affiliate.heading')}
             </h2>
             <p className="text-xs sm:text-sm text-slate-700 mt-1 max-w-2xl">
-              Compare and book hotels, flights, activities, eSIMs and travel services through our trusted travel partners.
+              {t('affiliate.subheading')}
             </p>
           </div>
 
@@ -58,7 +60,7 @@ export const AffiliateMarketplaceHighlight: React.FC<AffiliateMarketplaceHighlig
             onClick={() => onNavigate('affiliate-travel')}
             className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-[#0B1B3D] hover:bg-[#112755] text-amber-300 hover:text-amber-200 font-bold text-xs border border-slate-700 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
           >
-            <span>View All 15+ Partners</span>
+            <span>{t('affiliate.viewAll')}</span>
             <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
           </button>
         </div>
@@ -112,7 +114,8 @@ export const AffiliateMarketplaceHighlight: React.FC<AffiliateMarketplaceHighlig
         <div className="mt-10 p-4 rounded-xl bg-sky-50/80 border border-sky-200/90 text-[11px] text-slate-600 text-center max-w-4xl mx-auto flex items-center justify-center gap-2 shadow-xs">
           <ShieldCheck className="w-4 h-4 text-amber-600 shrink-0" />
           <span>
-            <strong className="text-[#0B1B3D]">Affiliate Disclosure:</strong> Some links on this website may be affiliate links. We may earn a commission if you make a qualifying purchase through our links, at no additional cost to you.
+            <strong className="text-[#0B1B3D]">{t('affiliate.disclosureTitle')}</strong>{' '}
+            {t('affiliate.disclosureText')}
           </span>
         </div>
       </div>

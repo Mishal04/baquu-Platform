@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Car, Users, MapPin, Moon, Info, ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
 import { ONE_NIGHT_STAY_SURCHARGE } from '../../data/initialData';
 
@@ -21,6 +22,7 @@ const PRICING_ROWS: PricingRow[] = [
 ];
 
 export const TransportPricingSection: React.FC = () => {
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState(false);
 
   const visibleRows = expanded ? PRICING_ROWS : PRICING_ROWS.slice(0, 5);

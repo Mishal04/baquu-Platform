@@ -37,7 +37,14 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
     property: 'Property information is subject to independent verification. Buyers should conduct independent legal, financial and property due diligence prior to transaction.',
     affiliate: 'Some links on this website may be affiliate links. SIRFPK may receive a commission from qualifying purchases through our partner links, at no additional cost to you.',
     travel: 'Tour prices, hotel availability, seasonal excursions and flight inclusions may vary based on dates and traveler requirements. Final confirmation is provided prior to booking.'
-  }
+  },
+  paymentDetails: {
+    payoneerEmail: 'syedkashifsaleem@gmail.com',
+    ublAccountNumber: '0563056326301880',
+    ublAccountTitle: 'Syed Kashif Saleem',
+    ublBranchCode: '',
+    additionalNote: 'Please send payment receipt via WhatsApp after transfer.',
+  },
 };
 
 export const INITIAL_TOURS: TourPackage[] = [

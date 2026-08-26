@@ -178,6 +178,13 @@ export interface SiteSettings {
     affiliate: string;
     travel: string;
   };
+  paymentDetails: {
+    payoneerEmail: string;
+    ublAccountNumber: string;
+    ublAccountTitle: string;
+    ublBranchCode: string;
+    additionalNote: string;
+  };
 }
 
 export type PageRoute =

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Building, Bed, Bath, Maximize2, TrendingUp, ArrowRight, MessageCircle, ShieldCheck } from 'lucide-react';
 import { PropertyListing, PageRoute } from '../../types';
 import { WatermarkedImage } from '../common/WatermarkedImage';
@@ -16,6 +17,7 @@ export const PropertyInvestmentHighlight: React.FC<PropertyInvestmentHighlightPr
   onNavigate,
   onOpenConsultation,
 }) => {
+  const { t } = useTranslation();
   const featuredProperties = properties.slice(0, 3);
 
   const handleWhatsApp = (prop: PropertyListing) => {
@@ -33,13 +35,13 @@ export const PropertyInvestmentHighlight: React.FC<PropertyInvestmentHighlightPr
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-900 text-xs font-bold uppercase tracking-wider mb-2">
               <Building className="w-3.5 h-3.5 text-amber-700" />
-              <span>Azerbaijan Real Estate Portal</span>
+              <span>{t('property.badge')}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0B1B3D] font-serif">
-              Buy Property in Azerbaijan with Confidence
+              {t('property.heading')}
             </h2>
             <p className="text-xs sm:text-sm text-slate-700 mt-1 max-w-xl">
-              Prime residential apartments in Baku White City, Caspian coastal sea-view villas, and high-yield commercial assets with complete foreign ownership verification.
+              {t('property.subheading')}
             </p>
           </div>
 
@@ -47,7 +49,7 @@ export const PropertyInvestmentHighlight: React.FC<PropertyInvestmentHighlightPr
             onClick={() => onNavigate('property')}
             className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-[#0B1B3D] hover:bg-[#112755] text-amber-300 hover:text-amber-200 font-bold text-xs border border-slate-700 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
           >
-            <span>Explore All Properties</span>
+            <span>{t('property.exploreAll')}</span>
             <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
           </button>
         </div>
@@ -122,7 +124,7 @@ export const PropertyInvestmentHighlight: React.FC<PropertyInvestmentHighlightPr
                 <div className="pt-2 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">
-                      {prop.priceNote || 'Price'}
+                      {prop.priceNote || t('property.startingFrom')}
                     </span>
                     <span className="text-xl font-black text-amber-600 font-serif">
                       ${prop.price.toLocaleString()}
@@ -134,7 +136,7 @@ export const PropertyInvestmentHighlight: React.FC<PropertyInvestmentHighlightPr
                       onClick={() => onSelectProperty(prop)}
                       className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-bold text-xs transition-all cursor-pointer shadow-sm border border-amber-300/60"
                     >
-                      View Property
+                      {t('property.viewProperty')}
                     </button>
                     <button
                       onClick={() => handleWhatsApp(prop)}
@@ -153,7 +155,7 @@ export const PropertyInvestmentHighlight: React.FC<PropertyInvestmentHighlightPr
         {/* Legal Disclaimer Box */}
         <div className="mt-10 p-4 rounded-xl bg-amber-50/80 border border-amber-200/90 text-[11px] text-slate-600 text-center shadow-xs">
           <p>
-            <strong className="text-[#0B1B3D]">Property Advisory Notice:</strong> Property prices and rental returns are indicative and subject to market conditions. Foreign buyers should conduct independent legal, financial, and title due diligence. Investment outcomes vary and should be independently assessed.
+            <strong className="text-[#0B1B3D]">{t('property.disclaimer')}</strong> {t('property.disclaimerText')}
           </p>
         </div>
       </div>

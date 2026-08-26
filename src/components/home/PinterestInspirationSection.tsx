@@ -1,5 +1,6 @@
 import React from 'react';
-import { Sparkles, ExternalLink, Compass } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { Sparkles, Compass } from 'lucide-react';
 import { PageRoute } from '../../types';
 import { WatermarkedImage } from '../common/WatermarkedImage';
 
@@ -10,6 +11,8 @@ interface PinterestInspirationSectionProps {
 export const PinterestInspirationSection: React.FC<PinterestInspirationSectionProps> = ({
   onNavigate,
 }) => {
+  const { t } = useTranslation();
+
   const pins = [
     {
       title: 'Baku Flame Towers at Night',
@@ -44,13 +47,13 @@ export const PinterestInspirationSection: React.FC<PinterestInspirationSectionPr
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold uppercase tracking-wider mb-2">
               <Sparkles className="w-3.5 h-3.5 text-rose-600" />
-              <span>Visual Travel Inspiration</span>
+              <span>{t('inspiration.badge')}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0F172A] font-serif">
-              Azerbaijan Travel Inspiration
+              {t('inspiration.heading')}
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
-              Immerse yourself in authentic visual galleries of Azerbaijan. All original promotional visuals created for SIRFPK with watermark protection.
+              {t('inspiration.subheading')}
             </p>
           </div>
 
@@ -59,7 +62,7 @@ export const PinterestInspirationSection: React.FC<PinterestInspirationSectionPr
             className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs border border-slate-800 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
           >
             <Compass className="w-3.5 h-3.5" />
-            <span>Discover Itineraries</span>
+            <span>{t('inspiration.discover')}</span>
           </button>
         </div>
 

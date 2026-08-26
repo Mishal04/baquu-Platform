@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Compass,
   FileCheck,
@@ -16,84 +17,79 @@ interface HeroServiceCardsProps {
 }
 
 export const HeroServiceCards: React.FC<HeroServiceCardsProps> = ({ onNavigate }) => {
+  const { t } = useTranslation();
   const services = [
     {
       id: 'tours',
-      title: 'Travel & Tours',
+      title: t('serviceCards.tours.title'),
       route: 'tours' as PageRoute,
       icon: <Compass className="w-6 h-6 text-amber-600" />,
       cardBg: 'bg-gradient-to-br from-amber-50/80 via-white to-amber-100/30',
       iconBg: 'bg-amber-100 border-amber-300 text-amber-800',
       borderColor: 'border-amber-200/90 hover:border-amber-500 hover:shadow-amber-500/15',
       badgeBg: 'bg-amber-100 text-amber-900 border-amber-300 font-bold',
-      description:
-        'Curated Baku city tours, Shahdag mountain ski packages, Gabala scenic getaways, and customized family & corporate itineraries.',
-      tag: 'Most Popular',
+      description: t('serviceCards.tours.desc'),
+      tag: t('serviceCards.tours.tag'),
     },
     {
       id: 'visa',
-      title: 'Visa Assistance',
+      title: t('serviceCards.visa.title'),
       route: 'visa' as PageRoute,
       icon: <FileCheck className="w-6 h-6 text-sky-600" />,
       cardBg: 'bg-gradient-to-br from-sky-50/80 via-white to-sky-100/30',
       iconBg: 'bg-sky-100 border-sky-300 text-sky-800',
       borderColor: 'border-sky-200/90 hover:border-sky-500 hover:shadow-sky-500/15',
       badgeBg: 'bg-sky-100 text-sky-900 border-sky-300 font-bold',
-      description:
-        'End-to-end guidance for Azerbaijan ASAN e-Visa applications, document validation, urgent processing assistance, and compliance support.',
-      tag: 'Fast Track 24h',
+      description: t('serviceCards.visa.desc'),
+      tag: t('serviceCards.visa.tag'),
     },
     {
       id: 'trc',
-      title: 'TRC & Residency',
+      title: t('serviceCards.trc.title'),
       route: 'trc' as PageRoute,
       icon: <ShieldCheck className="w-6 h-6 text-emerald-600" />,
       cardBg: 'bg-gradient-to-br from-emerald-50/80 via-white to-emerald-100/30',
       iconBg: 'bg-emerald-100 border-emerald-300 text-emerald-800',
       borderColor: 'border-emerald-200/90 hover:border-emerald-500 hover:shadow-emerald-500/15',
       badgeBg: 'bg-emerald-100 text-emerald-900 border-emerald-300 font-bold',
-      description:
-        'Professional legal consultancy for Azerbaijan Temporary Residence Permits (TRC) via Business, Property Investment, or Family.',
-      tag: 'Long-Term Relocation',
+      description: t('serviceCards.trc.desc'),
+      tag: t('serviceCards.trc.tag'),
     },
     {
       id: 'property',
-      title: 'Property Consultancy',
+      title: t('serviceCards.property.title'),
       route: 'property' as PageRoute,
       icon: <Building className="w-6 h-6 text-amber-700" />,
       cardBg: 'bg-gradient-to-br from-amber-50/70 via-white to-amber-100/40',
       iconBg: 'bg-amber-100 border-amber-300 text-amber-900',
       borderColor: 'border-amber-200/90 hover:border-amber-500 hover:shadow-amber-500/15',
       badgeBg: 'bg-amber-100 text-amber-900 border-amber-300 font-bold',
-      description:
-        'Buy sea-view apartments, luxury Baku White City residences, commercial units, and high-yield real estate with legal due diligence.',
-      tag: 'High ROI (8-10%)',
+      description: t('serviceCards.property.desc'),
+      tag: t('serviceCards.property.tag'),
     },
     {
       id: 'company',
-      title: 'Company Registration',
+      title: t('serviceCards.company.title'),
       route: 'company-registration' as PageRoute,
       icon: <Briefcase className="w-6 h-6 text-indigo-600" />,
       cardBg: 'bg-gradient-to-br from-indigo-50/80 via-white to-indigo-100/30',
       iconBg: 'bg-indigo-100 border-indigo-300 text-indigo-800',
       borderColor: 'border-indigo-200/90 hover:border-indigo-500 hover:shadow-indigo-500/15',
       badgeBg: 'bg-indigo-100 text-indigo-900 border-indigo-300 font-bold',
-      description:
-        'Complete Azerbaijan LLC (MMC) formation, corporate bank account setup, legal address support, tax registration, and ongoing accounting.',
-      tag: '100% Foreign Owned',
+      description: t('serviceCards.company.desc'),
+      tag: t('serviceCards.company.tag'),
     },
     {
       id: 'consultancy',
-      title: 'Business Consultancy',
+      title: t('serviceCards.consultancy.title'),
       route: 'business-consultancy' as PageRoute,
       icon: <TrendingUp className="w-6 h-6 text-teal-600" />,
       cardBg: 'bg-gradient-to-br from-teal-50/80 via-white to-teal-100/30',
       iconBg: 'bg-teal-100 border-teal-300 text-teal-800',
       borderColor: 'border-teal-200/90 hover:border-teal-500 hover:shadow-teal-500/15',
       badgeBg: 'bg-teal-100 text-teal-900 border-teal-300 font-bold',
-      description:
-        'Strategic market entry advisory, import/export facilitation, bilateral Pakistan-Azerbaijan trade networks, and corporate consulting.',
-      tag: 'Trade & Growth',
+      description: t('serviceCards.consultancy.desc'),
+      tag: t('serviceCards.consultancy.tag'),
     },
   ];
 
@@ -127,7 +123,7 @@ export const HeroServiceCards: React.FC<HeroServiceCardsProps> = ({ onNavigate }
             </div>
 
             <div className="relative z-10 pt-4 mt-4 border-t border-slate-200/80 flex items-center justify-between text-xs font-bold text-[#0B1B3D] group-hover:text-amber-700">
-              <span className="tracking-wide">Explore Service</span>
+              <span className="tracking-wide">{t('serviceCards.exploreService')}</span>
               <div className="w-7 h-7 rounded-full bg-slate-900 text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 flex items-center justify-center transition-all shadow-xs">
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </div>
