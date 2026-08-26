@@ -1,11 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Phone,
   MessageCircle,
   Mail,
-  MapPin,
-  ShieldAlert,
-  ExternalLink,
   ChevronRight,
   Sparkles,
   Lock,
@@ -25,6 +23,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenConsultation,
   onOpenLegal,
 }) => {
+  const { t } = useTranslation();
   const handleNav = (route: PageRoute) => {
     onNavigate(route);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -50,13 +49,13 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <p className="text-slate-300 text-xs leading-relaxed max-w-md">
-              Connecting Pakistan with Azerbaijan through comprehensive Travel, Tourism, Visa Guidance, TRC Residency, Premium Property Consultancy, Company Registration, and Affiliate Travel Solutions.
+              {t('footer.tagline')}
             </p>
 
             <div className="p-4 rounded-xl bg-[#0B1B3D]/80 border border-indigo-500/30 space-y-2.5 shadow-md">
               <div className="text-xs font-semibold text-amber-300 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Official Contact Numbers (WhatsApp & Call):
+                {t('footer.officialContact')}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <a
@@ -108,7 +107,7 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="space-y-3">
             <h4 className="text-white text-xs font-bold uppercase tracking-wider border-b border-indigo-900 pb-1.5 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-              Travel & Tours
+              {t('footer.travelTours')}
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
@@ -154,7 +153,7 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="space-y-3">
             <h4 className="text-white text-xs font-bold uppercase tracking-wider border-b border-indigo-900 pb-1.5 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
-              Residency & Business
+              {t('footer.residencyBusiness')}
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
@@ -194,7 +193,7 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="space-y-3">
             <h4 className="text-white text-xs font-bold uppercase tracking-wider border-b border-indigo-900 pb-1.5 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-              Property & Travel Hub
+              {t('footer.propertyHub')}
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
@@ -234,19 +233,19 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Legal Disclaimers Box */}
         <div className="py-6 border-b border-indigo-950 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-[11px] text-slate-400 leading-relaxed">
           <div className="bg-[#0A1633]/60 p-3 rounded-xl border border-indigo-900/60">
-            <span className="font-semibold text-amber-300 block mb-1 text-xs">Visa Disclaimer:</span>
+            <span className="font-semibold text-amber-300 block mb-1 text-xs">{t('footer.visaDisclaimer')}</span>
             {siteSettings.disclaimers.visa}
           </div>
           <div className="bg-[#0A1633]/60 p-3 rounded-xl border border-indigo-900/60">
-            <span className="font-semibold text-amber-300 block mb-1 text-xs">TRC Residency Disclaimer:</span>
+            <span className="font-semibold text-amber-300 block mb-1 text-xs">{t('footer.trcDisclaimer')}</span>
             {siteSettings.disclaimers.trc}
           </div>
           <div className="bg-[#0A1633]/60 p-3 rounded-xl border border-indigo-900/60">
-            <span className="font-semibold text-amber-300 block mb-1 text-xs">Property Disclaimer:</span>
+            <span className="font-semibold text-amber-300 block mb-1 text-xs">{t('footer.propertyDisclaimer')}</span>
             {siteSettings.disclaimers.property}
           </div>
           <div className="bg-[#0A1633]/60 p-3 rounded-xl border border-indigo-900/60">
-            <span className="font-semibold text-amber-300 block mb-1 text-xs">Affiliate & Travel Disclosure:</span>
+            <span className="font-semibold text-amber-300 block mb-1 text-xs">{t('footer.affiliateDisclaimer')}</span>
             {siteSettings.disclaimers.affiliate}
           </div>
         </div>
@@ -254,9 +253,9 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom Bar: Copyright, Links & Watermark Info */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            <p>© 2026 SIRFPK. All Rights Reserved.</p>
+            <p>{t('footer.copyright')}</p>
             <p className="text-[11px] text-slate-400 mt-0.5">
-              Official Portal: <strong className="text-amber-400">www.sirfpk.com</strong>
+              {t('footer.officialPortal')} <strong className="text-amber-400">www.sirfpk.com</strong>
             </p>
           </div>
 
