@@ -50,9 +50,17 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [phoneDropdownOpen, setPhoneDropdownOpen] = useState(false);
   // Derive the display code from the active i18n language (default EN)
-  const [selectedLang, setSelectedLang] = useState<string>(
-    () => Object.keys(LANG_CODE_MAP).find(k => LANG_CODE_MAP[k] === i18n.language) ?? 'EN'
-  );
+  const [selectedLang, setSelectedLang] = useState<string>(() => {
+    // Read from localStorage so it persists across full page loads on live
+    const stored = localStorage.getItem('i18nextLng');
+    if (stored) {
+      // i18next may store a full locale like 'en-US' — normalise to base code
+      const base = stored.split('-')[0].toUpperCase();
+      const match = Object.keys(LANG_CODE_MAP).find(k => k === base);
+      return match ?? 'EN';
+    }
+    return Object.keys(LANG_CODE_MAP).find(k => LANG_CODE_MAP[k] === i18n.language) ?? 'EN';
+  });
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
   useEffect(() => {

@@ -17,13 +17,15 @@ i18n
       az: { translation: az },
       ru: { translation: ru },
     },
-    // Map the display codes used in the Navbar (EN/UR/AZ/RU) to i18next language codes
-    lng: 'en',
+    // Do NOT set lng here — let LanguageDetector read from localStorage first.
+    // If nothing is stored, fall back to English.
     fallbackLng: 'en',
+    supportedLngs: ['en', 'ur', 'az', 'ru'],
     interpolation: {
-      escapeValue: false, // React already escapes values
+      escapeValue: false,
     },
     detection: {
+      // Check localStorage first, then browser language
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
       lookupLocalStorage: 'i18nextLng',
