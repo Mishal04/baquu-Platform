@@ -8,6 +8,7 @@ import 'dotenv/config';
 
 async function startServer() {
   const app = express();
+  app.set('trust proxy', 1);
   const PORT = parseInt(process.env.PORT || '3001', 10);
 
   app.use(express.json({ limit: '10mb' }));
@@ -117,19 +118,34 @@ async function startServer() {
       const defaultSystem =
         'You are an expert copywriter, travel consultant, and SEO strategist for SIRFPK (www.sirfpk.com), a premier travel, tours, Azerbaijan visa, TRC residency, and property consultancy connecting Pakistan and Azerbaijan. Write elegant, compelling, and accurate content with sophisticated tone and clear structure.';
 
-      const response = await ai.models.generateContent({
-        model: 'gemini-3.7-flash',
-        contents: prompt,
-        config: {
-          systemInstruction: systemInstruction || defaultSystem,
-          temperature: 0.7,
-        },
-      });
+      const models = ['gemini-2.5-flash', 'gemini-3.6-flash'];
+      let lastError: any = null;
 
-      res.json({
-        text: response.text || '',
-        success: true,
-      });
+      for (const model of models) {
+        try {
+          const response = await ai.models.generateContent({
+            model,
+            contents: prompt,
+            config: {
+              systemInstruction: systemInstruction || defaultSystem,
+              temperature: 0.7,
+            },
+          });
+
+          return res.json({
+            text: response.text || '',
+            success: true,
+            model,
+          });
+        } catch (err: any) {
+          lastError = err;
+          console.warn(`Model ${model} failed (${err?.status || 'unknown'}), trying next...`);
+          continue;
+        }
+      }
+
+      // All models failed
+      throw lastError;
     } catch (error: any) {
       console.error('Gemini generation error:', error);
       res.status(500).json({
