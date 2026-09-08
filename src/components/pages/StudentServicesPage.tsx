@@ -146,6 +146,15 @@ export const StudentServicesPage: React.FC<StudentServicesPageProps> = ({
             UZBEKISTAN SECTION
         ═══════════════════════════════════════════════ */}
         <div className="space-y-8">
+          {/* Uzbekistan Admissions Poster Image */}
+          <div className="rounded-3xl overflow-hidden border border-emerald-500/40 shadow-2xl">
+            <img
+              src="/images/destinations/uzbekistan-admissions.jpeg"
+              alt="Study in Uzbekistan - Admissions Open for International Students"
+              className="w-full object-contain"
+            />
+          </div>
+
           {/* Uzbekistan Header Banner */}
           <div className="relative rounded-3xl overflow-hidden border border-emerald-500/40 shadow-2xl">
             {/* Background gradient */}
