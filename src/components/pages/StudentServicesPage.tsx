@@ -146,20 +146,10 @@ export const StudentServicesPage: React.FC<StudentServicesPageProps> = ({
             UZBEKISTAN SECTION
         ═══════════════════════════════════════════════ */}
         <div className="space-y-8">
-          {/* Uzbekistan Admissions Poster Image */}
-          <div className="rounded-3xl overflow-hidden border border-emerald-500/40 shadow-2xl">
-            <img
-              src="/images/destinations/uzbekistan-admissions.jpeg"
-              alt="Study in Uzbekistan - Admissions Open for International Students"
-              className="w-full object-contain"
-            />
-          </div>
-
           {/* Uzbekistan Header Banner */}
           <div className="relative rounded-3xl overflow-hidden border border-emerald-500/40 shadow-2xl">
             {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#1a4731] via-[#0f3320] to-[#051a0e]" />
-            <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Registan_at_Dusk.jpg/1280px-Registan_at_Dusk.jpg')] bg-cover bg-center opacity-20" />
 
             <div className="relative z-10 p-8 sm:p-12">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -267,23 +257,14 @@ export const StudentServicesPage: React.FC<StudentServicesPageProps> = ({
           {/* Uzbekistan Cities */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { city: 'Tashkent', desc: 'Modern & Vibrant', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tashkent_at_night.jpg/640px-Tashkent_at_night.jpg' },
-              { city: 'Samarkand', desc: 'Rich History', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Registan_at_Dusk.jpg/640px-Registan_at_Dusk.jpg' },
-              { city: 'Bukhara', desc: 'Timeless Beauty', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Bukhara_-_Kalon_Mosque.jpg/640px-Bukhara_-_Kalon_Mosque.jpg' },
-              { city: 'Modern Universities', desc: 'For a Global Career', image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=640&q=80' },
+              { city: 'Tashkent', desc: 'Modern & Vibrant' },
+              { city: 'Samarkand', desc: 'Rich History' },
+              { city: 'Bukhara', desc: 'Timeless Beauty' },
+              { city: 'Modern Universities', desc: 'For a Global Career' },
             ].map((place, idx) => (
-              <div key={idx} className="rounded-xl overflow-hidden border border-slate-700 group">
-                <div className="h-32 overflow-hidden">
-                  <img
-                    src={place.image}
-                    alt={place.city}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-3 bg-slate-900 text-center">
-                  <p className="text-xs font-bold text-white">{place.city}</p>
-                  <p className="text-[10px] text-slate-400">{place.desc}</p>
-                </div>
+              <div key={idx} className="p-5 rounded-xl bg-gradient-to-b from-slate-900 to-[#0B1B3D] border border-emerald-500/20 text-center space-y-1">
+                <p className="text-sm font-bold text-white">{place.city}</p>
+                <p className="text-[11px] text-slate-400">{place.desc}</p>
               </div>
             ))}
           </div>
